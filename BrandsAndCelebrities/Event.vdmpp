@@ -1,0 +1,42 @@
+class Event
+types
+-- TODO Define types here
+	public String = seq of char;
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	public name : String;
+	private activity : Activity;
+	private celebs : seq of Celebrity := [];
+	
+operations
+-- TODO Define operations here
+	public Event: String * Activity ==> 	Event
+	Event(nm, act) == (
+		name := nm;
+		activity := act;
+	);
+	
+	public getActivity : () ==> Activity
+	getActivity() == return activity;
+	
+	public addCelebrity : Celebrity ==> ()
+	addCelebrity(c) == celebs := celebs ^ [c];
+	
+	public removeCelebrity : Celebrity ==> ()
+	removeCelebrity(c) == (
+		dcl i: int;
+		dcl new_celebs: seq of Celebrity := [];
+		for i = 1 to len celebs do (
+			if celebs(i) <> c
+			then new_celebs := new_celebs ^ [celebs(i)]
+		);
+		celebs := new_celebs;
+	);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Event

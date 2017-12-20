@@ -1,16 +1,17 @@
 class Agency
 types
 -- TODO Define types here
+	public String = seq1 of char;
 values
 -- TODO Define values here
 instance variables
 -- TODO Define instance variables here
-	public name : seq1 of char;
+	public name : String;
 	private funds : nat := 0;
 	
 operations
 -- TODO Define operations here
-	public Agency : seq1 of char ==> Agency
+	public Agency : String ==> Agency
 	Agency(nm) == name := nm;
 	
 	public getFunds : () ==> nat
