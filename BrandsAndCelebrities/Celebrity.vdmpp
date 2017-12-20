@@ -1,0 +1,25 @@
+class Celebrity
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	public name: seq1 of char;
+	public activity: Activity;
+	public rating: nat1;
+	
+operations
+-- TODO Define operations here
+	public Celebrity : seq1 of char * Activity * nat1 ==> Celebrity
+	Celebrity(nm, act, rt) == (
+		name := nm;
+		activity := act;
+		rating := rt;
+	);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Celebrity

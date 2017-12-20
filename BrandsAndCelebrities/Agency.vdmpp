@@ -1,0 +1,31 @@
+class Agency
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	public name : seq1 of char;
+	private funds : nat := 0;
+	
+operations
+-- TODO Define operations here
+	public Agency : seq1 of char ==> Agency
+	Agency(nm) == name := nm;
+	
+	public getFunds : () ==> nat
+	getFunds() == return funds;
+	
+	public addFunds : nat ==> ()
+	addFunds(qty) == funds := funds + qty
+	pre qty >= 0;
+	
+	public removeFunds : nat ==> ()
+	removeFunds(qty) == funds := funds - qty
+	pre funds >= qty;
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Agency
