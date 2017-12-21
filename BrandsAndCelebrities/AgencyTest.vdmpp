@@ -1,0 +1,56 @@
+class AgencyTest
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	a : Agency := new Agency("test");
+	act : Activity := new Activity("test");
+	c : Celebrity :=  new Celebrity("Test Celebrity", act, 5, 35);
+	s : Service := new Service(act);
+	
+operations
+-- TODO Define operations here
+	private assertTrue: bool ==> ()
+	assertTrue(cond) == return
+	pre cond;
+	
+	private testAddRemoveFunds: () ==> ()
+	testAddRemoveFunds() == (
+		a.addFunds(100);
+		assertTrue(a.getFunds() = 100);
+		a.removeFunds(50);
+		assertTrue(a.getFunds() = 50);
+	);
+	
+	private testHireFireCelebritytoService: () ==> ()
+	testHireFireCelebritytoService() == (
+		a.addFunds(100);
+		assertTrue(a.getServices() = []);
+		a.addService(s);
+		assertTrue(a.getServices() = [s]);
+		assertTrue(a.getServices()(1).getCelebrities() = []);
+		a.hireCelebrity(s, c);
+		assertTrue(a.getServices()(1).getCelebrities() = [c]);
+		a.fireCelebrity(c);
+		assertTrue(a.getServices()(1).getCelebrities() = []);
+	);
+	
+	private testGets: () ==> ()
+	testGets() == (
+		assertTrue(a.getFunds() = 0);
+		assertTrue(a.getServices() = []);
+	);
+	
+	public static runTests: () ==> ()
+	runTests() == (
+		new AgencyTest().testAddRemoveFunds();
+		new AgencyTest().testHireFireCelebritytoService();
+		new AgencyTest().testGets();
+	)
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end AgencyTest

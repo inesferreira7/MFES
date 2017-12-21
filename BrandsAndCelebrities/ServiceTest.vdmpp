@@ -1,0 +1,43 @@
+class ServiceTest
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	act : Activity := new Activity("test");
+	s : Service := new Service(act);
+	c1 : Celebrity :=  new Celebrity("Test Celebrity 1", act, 5, 35);
+	c2 : Celebrity :=  new Celebrity("Test Celebrity 2", act, 4, 27);
+operations
+-- TODO Define operations here
+	private assertTrue: bool ==> ()
+	assertTrue(cond) == return
+	pre cond;
+
+	private testAddRemoveCelebrity: () ==> ()
+	testAddRemoveCelebrity() == (
+		s.addCelebrity(c1);
+		s.addCelebrity(c2);
+		assertTrue(s.getCelebrities() = [c1, c2]);
+		s.removeCelebrity(c1);
+		assertTrue(s.getCelebrities() = [c2]);
+	);
+	
+	private testGets: () ==> ()
+	testGets() == (
+		assertTrue(s.getActivity() = act);
+		assertTrue(s.getCelebrities() = []);
+	);
+	
+	public static runTests: () ==> ()
+	runTests() == (
+		new ServiceTest().testGets();
+		new ServiceTest().testAddRemoveCelebrity();
+	)
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end ServiceTest
