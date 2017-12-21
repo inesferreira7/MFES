@@ -5,8 +5,13 @@ values
 -- TODO Define values here
 instance variables
 -- TODO Define instance variables here
+	public celebrities : seq of Celebrity := [];
+	public agencies : seq of Agency := [];
 operations
 -- TODO Define operations here
+	public BrandsAndCelebrities : () ==> BrandsAndCelebrities
+	BrandsAndCelebrities() == return self;
+	
 functions
 -- TODO Define functiones here
 traces

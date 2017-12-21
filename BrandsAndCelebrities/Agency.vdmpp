@@ -8,6 +8,7 @@ instance variables
 -- TODO Define instance variables here
 	public name : String;
 	private funds : nat := 0;
+	private services : seq of Service := [];
 	
 operations
 -- TODO Define operations here
@@ -24,6 +25,32 @@ operations
 	public removeFunds : nat ==> ()
 	removeFunds(qty) == funds := funds - qty
 	pre funds >= qty;
+	
+	public addService : Activity ==> ()
+	addService(act) == (
+		dcl s : Service := new Service(act);
+		services := services ^ [s];
+	);
+	
+	public hireCelebrity : Service * Celebrity ==> ()
+	hireCelebrity(serv, cel) == (
+		dcl i: int;
+		for i = 1 to len services do (
+			if services(i) = serv
+			then (
+				services(i).addCelebrity(cel);
+				removeFunds(cel.getPrice());
+			)
+		);
+	);
+	
+	public fireCelebrity : Celebrity ==> ()
+	fireCelebrity(cel) == (
+		dcl i: int;
+		for i = 1 to len services do (
+			services(i).removeCelebrity(cel);
+		);	
+	)
 	
 functions
 -- TODO Define functiones here

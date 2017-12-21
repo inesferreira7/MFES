@@ -7,9 +7,9 @@ values
 instance variables
 -- TODO Define instance variables here
 	public name: String;
-	public activity: Activity;
-	public rating: nat1;
-	public price: nat1;
+	private activity: Activity;
+	private rating: nat1;
+	private price: nat1;
 	
 operations
 -- TODO Define operations here
@@ -20,6 +20,15 @@ operations
 		rating := rt;
 		price := prc;
 	);
+	
+	public getActivity : () ==> Activity
+	getActivity() == return activity;
+
+	public getRating : () ==> nat1
+	getRating() == return rating;
+	
+	public getPrice : () ==> nat1
+	getPrice() == return price;
 	
 functions
 -- TODO Define functiones here

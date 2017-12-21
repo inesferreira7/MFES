@@ -1,26 +1,23 @@
-class Event
+class Service
 types
 -- TODO Define types here
-	public String = seq of char;
 values
 -- TODO Define values here
 instance variables
 -- TODO Define instance variables here
-	public name : String;
 	private activity : Activity;
 	private celebs : seq of Celebrity := [];
-	
 operations
 -- TODO Define operations here
-	public Event: String * Activity ==> 	Event
-	Event(nm, act) == (
-		name := nm;
-		activity := act;
-	);
+	public Service : Activity ==> Service
+	Service(act) == activity := act;
 	
 	public getActivity : () ==> Activity
 	getActivity() == return activity;
 	
+	public getCelebrities : () ==> seq of Celebrity
+	getCelebrities() == return celebs;
+
 	public addCelebrity : Celebrity ==> ()
 	addCelebrity(c) == celebs := celebs ^ [c];
 	
@@ -34,9 +31,8 @@ operations
 		);
 		celebs := new_celebs;
 	);
-	
 functions
 -- TODO Define functiones here
 traces
 -- TODO Define Combinatorial Test Traces here
-end Event
+end Service
