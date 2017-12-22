@@ -30,6 +30,9 @@ operations
 	public getPrice : () ==> nat1
 	getPrice() == return price;
 	
+	public changeActivity : Activity ==> ()
+	changeActivity(act) == activity := act;
+	
 functions
 -- TODO Define functiones here
 traces

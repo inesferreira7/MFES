@@ -18,6 +18,9 @@ operations
 	public getFunds : () ==> nat
 	getFunds() == return funds;
 	
+	public getServices : () ==> seq of Service
+	getServices() == return services;
+	
 	public addFunds : nat ==> ()
 	addFunds(qty) == funds := funds + qty
 	pre qty >= 0;
