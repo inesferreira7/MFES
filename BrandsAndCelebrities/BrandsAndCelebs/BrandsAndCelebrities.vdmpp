@@ -12,6 +12,17 @@ operations
 	public BrandsAndCelebrities : () ==> BrandsAndCelebrities
 	BrandsAndCelebrities() == return self;
 	
+	public getCelebsWithActivity : Activity ==> seq of Celebrity
+	getCelebsWithActivity(act) == (
+		dcl i: int;
+		dcl celebs: seq of Celebrity := [];
+		for i = 1 to len celebs do (
+			if celebs(i).getActivity() <> act
+			then celebs := celebs ^ [celebs(i)]
+		);
+		return celebs
+	);
+	
 functions
 -- TODO Define functiones here
 traces
