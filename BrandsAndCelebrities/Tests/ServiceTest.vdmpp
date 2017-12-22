@@ -17,21 +17,28 @@ operations
 
 	private testAddRemoveCelebrity: () ==> ()
 	testAddRemoveCelebrity() == (
+		IO`print("* Test adding and removing celebrities from a service *\n");
+		IO`print("\nAdding 2 celebrities to the service...\n");
 		s.addCelebrity(c1);
 		s.addCelebrity(c2);
 		assertTrue(s.getCelebrities() = [c1, c2]);
+		IO`print("Current celebrities: "); IO`print(s.getCelebrities()(1)); IO`print(s.getCelebrities()(2)); IO`print("\n");
+		IO`print("Removing the first celebrity...\n");
 		s.removeCelebrity(c1);
 		assertTrue(s.getCelebrities() = [c2]);
+		IO`print("Current celebrities: "); IO`print(s.getCelebrities()(1)); IO`print("\n");
 	);
 	
 	private testGets: () ==> ()
 	testGets() == (
+		IO`print("\nTesting get functions...\n");
 		assertTrue(s.getActivity() = act);
 		assertTrue(s.getCelebrities() = []);
 	);
 	
 	public static runTests: () ==> ()
 	runTests() == (
+		IO`print("*** Running Service tests ***\n");
 		new ServiceTest().testGets();
 		new ServiceTest().testAddRemoveCelebrity();
 	)

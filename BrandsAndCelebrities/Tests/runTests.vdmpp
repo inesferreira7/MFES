@@ -14,9 +14,14 @@ operations
 	public main: () ==> ()
 	main() ==
 	(
+		IO`print("***** Running all tests *****\n");
 		at1.runTests();
+		IO`print("\n\n");
 		ct1.runTests();
+		IO`print("\n\n");
 		st1.runTests();
+		IO`print("\n\n");
+		IO`print("***** Finished running the tests *****\n")
 	);
 functions
 -- TODO Define functiones here
