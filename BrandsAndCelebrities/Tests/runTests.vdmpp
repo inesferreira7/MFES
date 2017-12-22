@@ -1,0 +1,30 @@
+class runTests
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	at1 : AgencyTest := new AgencyTest();
+	ct1 : CelebrityTest := new CelebrityTest();
+	st1 : ServiceTest := new ServiceTest();
+	
+operations
+-- TODO Define operations here
+	public main: () ==> ()
+	main() ==
+	(
+		IO`print("***** Running all tests *****\n");
+		at1.runTests();
+		IO`print("\n\n");
+		ct1.runTests();
+		IO`print("\n\n");
+		st1.runTests();
+		IO`print("\n\n");
+		IO`print("***** Finished running the tests *****\n")
+	);
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end runTests

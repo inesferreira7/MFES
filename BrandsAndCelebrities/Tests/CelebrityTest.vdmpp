@@ -1,0 +1,46 @@
+class CelebrityTest
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	old_act : Activity := new Activity("test");
+	new_act : Activity := new Activity("change_test");
+	c : Celebrity := new Celebrity("Test Celebrity", old_act, 5, 35);
+operations
+-- TODO Define operations here
+	private assertTrue: bool ==> ()
+	assertTrue(cond) == return
+	pre cond;
+	
+	private testChangeActivity: () ==> ()
+	testChangeActivity() == (
+		IO`print("\n* Test changing the activity of the celebrity *\n");
+		IO`print("\nCurrent Activity: "); IO`print(old_act); IO`print("\n");
+		IO`print("Changing activity...\n");
+		c.changeActivity(new_act);
+		assertTrue(c.getActivity() = new_act);
+		IO`print("Current Activity: "); IO`print(new_act); IO`print("\n")
+	);
+	
+	private testGets: () ==> ()
+	testGets() == (
+		IO`print("\nTesting get functions...\n");
+		assertTrue(c.getActivity() = old_act);
+		assertTrue(c.getRating() = 5);
+		assertTrue(c.getPrice() = 35);
+	);
+
+	public static runTests: () ==> ()
+	runTests() == (
+		IO`print("*** Running Celebrity tests ***\n");
+		new CelebrityTest().testGets();
+		new CelebrityTest().testChangeActivity()
+	)
+
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end CelebrityTest
