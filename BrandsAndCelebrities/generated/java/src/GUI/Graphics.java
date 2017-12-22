@@ -37,9 +37,11 @@ public class Graphics {
 		System.out.println("**********     Brands and Celebrities   **********");
 		System.out.println("**************************************************");
 		System.out.println("*                                                *");
-		System.out.println("*                    You are :                   *");
-		System.out.println("*                                                *");
+		System.out.println("*                    Enter as:                   *");
 		System.out.println("*     1 - Celebrity              2 - Agency      *");
+		System.out.println("*                                                *");
+		System.out.println("*                                                *");
+		System.out.println("*        3 - Consult available services          *");
 		System.out.println("*                                                *");
 		System.out.println("**************************************************");
 		
@@ -55,6 +57,9 @@ public class Graphics {
 		else if (choice == 2){
 			System.out.println("Agencia");
 			menuDivide();
+		}
+		else if(choice == 3){
+			menuListActivities(choice);
 		}
 		else{
 			clearScreen();
@@ -206,8 +211,13 @@ public class Graphics {
 		System.out.println("You've chosen " + c.name + ". To complete the contract, you have to register.");
 		menuAgencyRegister(a, c);
 		}
-		if(account == 2){
+		else if(account == 2){
 			System.out.println("You've chosen " + c.name + ". Contract finalized!");
+		}
+		else if(account == 3){
+			System.out.println("Enter platform as an agency to make a contract!");
+			System.out.println();
+			menuChooseUser();
 		}
 	}
 	
