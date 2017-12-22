@@ -49,6 +49,7 @@ public class Graphics {
 			clearScreen();
 			menuCelebrityRegister();
 			System.out.println("Registered successfully! Just wait for a contact.");
+			System.out.println();
 			menuChooseUser();
 		}
 		else if (choice == 2){
@@ -76,11 +77,11 @@ public class Graphics {
 		
 		if(choice == 1){
 			clearScreen();
-			menuNoAccount();
+			menuNoAccount(choice);
 		}
 		else if(choice == 2){
 			clearScreen();
-			menuAccount();		
+			menuAccount(choice);		
 		}	
 		else if(choice == 3){
 			clearScreen();
@@ -94,7 +95,7 @@ public class Graphics {
 		
 	}
 	
-	private static void menuNoAccount(){
+	private static void menuNoAccount(int account){
 		
 		System.out.println("**************************************************");
 		System.out.println("*                                                *");
@@ -107,11 +108,11 @@ public class Graphics {
 		
 		if(choice == 1){
 			clearScreen();
-			menuListActivities();
+			menuListActivities(account);
 		}
-		
 	}
-	private static void menuAccount(){
+	
+	private static void menuAccount(int account){
 		
 		System.out.println("**************************************************");
 		System.out.println("*                                                *");
@@ -120,6 +121,13 @@ public class Graphics {
 		System.out.println("*       3 - Exit                                 *");
 		System.out.println("                                                 *");
 		System.out.println("**************************************************");
+		
+		int choice = getIntChoice();
+		
+		if(choice ==1){
+			clearScreen();
+			menuListActivities(account);
+		}
 	}
 	
 	private static void menuCelebrityRegister(){
@@ -168,7 +176,7 @@ public class Graphics {
 		
 	}
 	
-	private static void menuListActivities(){
+	private static void menuListActivities(int account){
 		
 		System.out.println("**************************************************");
 		System.out.println("**********           Services           **********");
@@ -182,10 +190,10 @@ public class Graphics {
 		
 		int service = getIntChoice();
 		Activity a = getActivity(service);
-		menuListCelebrities(a);
+		menuListCelebrities(a, account);
 	}
 	
-	public static void menuListCelebrities(Activity a){
+	public static void menuListCelebrities(Activity a, int account){
 		
 		System.out.println("**************************************************");
 		System.out.println("**********       Celebrities to         **********");
@@ -194,8 +202,13 @@ public class Graphics {
 		System.out.println();
 		System.out.println("**************************************************");
 		System.out.println();
+		if(account == 1){
 		System.out.println("You've chosen " + c.name + ". To complete the contract, you have to register.");
 		menuAgencyRegister(a, c);
+		}
+		if(account == 2){
+			System.out.println("You've chosen " + c.name + ". Contract finalized!");
+		}
 	}
 	
 	public static int getIntChoice() {	
