@@ -38,6 +38,7 @@ public class Graphics {
 		}
 		else if (choice == 2){
 			System.out.println("Agencia");
+			menuDivide();
 		}
 		else{
 			clearScreen();
@@ -46,9 +47,62 @@ public class Graphics {
 		}	
 	}
 	
+	private static void menuDivide(){
+		
+		System.out.println("**************************************************");
+		System.out.println("                                                  ");
+		System.out.println("         1 - I don't have an account              ");
+		System.out.println("         2 - I already have an account            ");
+		System.out.println("         3 - Exit                                 ");
+		System.out.println("                                                  ");
+		System.out.println("**************************************************");
+		
+		int choice = getIntChoice();
+		
+		if(choice == 1){
+			clearScreen();
+			menuNoAccount();
+		}
+		else if(choice == 2){
+			clearScreen();
+			menuAccount();		
+		}	
+		else if(choice == 3){
+			clearScreen();
+			menuChooseUser();
+		}
+		else{
+			clearScreen();
+			System.out.println("Please enter a valid option.");
+			menuDivide();
+		}
+		
+	}
+	
+	private static void menuNoAccount(){
+		
+		System.out.println("**************************************************");
+		System.out.println("*                                                *");
+		System.out.println("*       1 - Consult services available           *");
+		System.out.println("*       2 - Exit                                 *");
+		System.out.println("                                                 *");
+		System.out.println("**************************************************");
+		
+	}
+	private static void menuAccount(){
+		
+		System.out.println("**************************************************");
+		System.out.println("*                                                *");
+		System.out.println("*       1 - Consult services available           *");
+		System.out.println("*       2 - List all my contracts                *");
+		System.out.println("*       3 - Exit                                 *");
+		System.out.println("                                                 *");
+		System.out.println("**************************************************");
+	}
+	
 	private static void menuCelebrityRegister(){
 		System.out.println("**************************************************");
-		System.out.println("**********                   Register   **********");
+		System.out.println("**********       Celebrity Register     **********");
 		System.out.println("**************************************************");
 		System.out.println("*                                                *");
 		System.out.println("*              Insert your name :                *");
@@ -84,6 +138,21 @@ public class Graphics {
 		platform.addCelebrity(c);
 		
 	}
+	
+	private static void menuAgencyRegister(){
+		
+		System.out.println("**************************************************");
+		System.out.println("**********       Celebrity Register     **********");
+		System.out.println("**************************************************");
+		System.out.println("*                                                *");
+		System.out.println("*             Insert agency name :               *");
+		String name = getStringChoice();
+		System.out.println("*          Insert funds available :              *");
+		int funds = getIntChoice();
+		
+		
+		
+	}
 
 	
 	public static int getIntChoice() {	
@@ -117,3 +186,4 @@ public class Graphics {
 		else return "erro";	
 	}
 }
+

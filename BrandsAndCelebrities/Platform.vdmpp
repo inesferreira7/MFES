@@ -15,8 +15,25 @@ operations
 	public Platform : () ==> Platform
 	Platform() == return self;
 	
+	public getCelebsWithActivity : Activity ==> seq of Celebrity
+	getCelebsWithActivity(act) == (
+		dcl i: int;
+		dcl celebs: seq of Celebrity := [];
+		for i = 1 to len celebrities do (
+			if celebrities(i).getActivity() <> act
+			then celebs := celebs ^ [celebrities(i)] ;
+		);
+		return celebs
+	);
+	
 	public addCelebrity : Celebrity ==> ()
 	addCelebrity(c) == celebrities := celebrities ^ [c];
+	
+	public addAgency : Agency ==> ()
+	addAgency(a) == agencies := agencies ^ [a];
+	
+	public getCelebrities : () ==> seq of Celebrity
+	getCelebrities() == return celebrities;
 	
 functions
 -- TODO Define functiones here

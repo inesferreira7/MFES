@@ -1,0 +1,37 @@
+class Celebrity
+types
+-- TODO Define types here
+	public String = seq1 of char;
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	public name: String;
+	private activity: Activity;
+	private rating: nat1;
+	private price: nat1;
+	
+operations
+-- TODO Define operations here
+	public Celebrity : String * Activity * nat1 * nat1 ==> Celebrity
+	Celebrity(nm, act, rt, prc) == (
+		name := nm;
+		activity := act;
+		rating := rt;
+		price := prc;
+	);
+	
+	public getActivity : () ==> Activity
+	getActivity() == return activity;
+
+	public getRating : () ==> nat1
+	getRating() == return rating;
+	
+	public getPrice : () ==> nat1
+	getPrice() == return price;
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Celebrity
