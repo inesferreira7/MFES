@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 
+import org.overture.codegen.runtime.VDMSeq;
+
 import BrandsAndCelebrities.Activity;
 import BrandsAndCelebrities.Celebrity;
 import BrandsAndCelebrities.Platform;
@@ -15,7 +17,20 @@ public class Graphics {
 	
 	public static void main(String [] args){
 		platform = new Platform();
-		menuChooseUser();
+		//menuChooseUser();
+		
+		Activity a1 = new Activity("Sponsor");
+		Celebrity c1 = new Celebrity("ines", a1, 5,80);
+		Celebrity c2 = new Celebrity("joao", a1, 4, 70);
+		
+		platform.addCelebrity(c1);
+		platform.addCelebrity(c2);
+		VDMSeq test = platform.getCelebsWithActivity(a1);
+		System.out.println(a1);
+		System.out.println(c1.getActivity());
+		System.out.println("Oi: " + platform.getCelebrities().size() + " " + test.size());
+		
+		
 	}
 	
 	private static void menuChooseUser(){
@@ -33,8 +48,10 @@ public class Graphics {
 		int choice = getIntChoice();
 		
 		if(choice == 1){
-			System.out.println("Celebridade");
+			clearScreen();
 			menuCelebrityRegister();
+			System.out.println("Registered successfully! Just wait for a contact.");
+			menuChooseUser();
 		}
 		else if (choice == 2){
 			System.out.println("Agencia");
@@ -50,11 +67,11 @@ public class Graphics {
 	private static void menuDivide(){
 		
 		System.out.println("**************************************************");
-		System.out.println("                                                  ");
-		System.out.println("         1 - I don't have an account              ");
-		System.out.println("         2 - I already have an account            ");
-		System.out.println("         3 - Exit                                 ");
-		System.out.println("                                                  ");
+		System.out.println("*                                                *");
+		System.out.println("*        1 - I don't have an account             *");
+		System.out.println("*        2 - I already have an account           *");
+		System.out.println("*        3 - Exit                                *");
+		System.out.println("*                                                *");
 		System.out.println("**************************************************");
 		
 		int choice = getIntChoice();
@@ -88,6 +105,13 @@ public class Graphics {
 		System.out.println("                                                 *");
 		System.out.println("**************************************************");
 		
+		int choice = getIntChoice();
+		
+		if(choice == 1){
+			clearScreen();
+			menuListActivities();
+		}
+		
 	}
 	private static void menuAccount(){
 		
@@ -113,12 +137,7 @@ public class Graphics {
 		int price = getIntChoice();
 		System.out.println("*  Choose the type of activity to collaborate :  *");
 		
-		Iterator iter = Platform.Activity.iterator();
-		int i=1;
-		while (iter.hasNext()) {
-		    System.out.println(i + " - " + getActivityString(iter.next()));
-		    i++;
-		}
+		listActivities();
 		
 		int activity = getIntChoice();
 		Activity a = null;
@@ -149,7 +168,21 @@ public class Graphics {
 		String name = getStringChoice();
 		System.out.println("*          Insert funds available :              *");
 		int funds = getIntChoice();
+	}
+	
+	private static void menuListActivities(){
 		
+		System.out.println("**************************************************");
+		System.out.println("**********           Services           **********");
+		System.out.println("**************************************************");
+		System.out.println("                                                  ");
+		listActivities();
+		System.out.println("                                                  ");
+		System.out.println("**************************************************");
+		System.out.println("");
+		System.out.println("Choose the service you need");
+		
+		int service = getIntChoice();
 		
 		
 	}
@@ -184,6 +217,16 @@ public class Graphics {
 		else if(obj.getClass() == BrandsAndCelebrities.quotes.SponsorQuote.class)
 			return "Sponsor";
 		else return "erro";	
+	}
+	
+	public static void listActivities(){
+		
+		Iterator iter = Platform.Activity.iterator();
+		int i=1;
+		while (iter.hasNext()) {
+		    System.out.println("                  " + i + " - " + getActivityString(iter.next()));
+		    i++;
+		}
 	}
 }
 
