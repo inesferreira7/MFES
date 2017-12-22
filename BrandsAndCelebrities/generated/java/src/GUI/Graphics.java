@@ -7,8 +7,10 @@ import java.util.Iterator;
 import org.overture.codegen.runtime.VDMSeq;
 
 import BrandsAndCelebrities.Activity;
+import BrandsAndCelebrities.Agency;
 import BrandsAndCelebrities.Celebrity;
 import BrandsAndCelebrities.Platform;
+import BrandsAndCelebrities.Service;
 
 public class Graphics {
 
@@ -17,19 +19,15 @@ public class Graphics {
 	
 	public static void main(String [] args){
 		platform = new Platform();
-		//menuChooseUser();
 		
-		Activity a1 = new Activity("Sponsor");
-		Celebrity c1 = new Celebrity("ines", a1, 5,80);
-		Celebrity c2 = new Celebrity("joao", a1, 4, 70);
+		Activity a1 = new Activity("Embassador");
+		Celebrity c1 = new Celebrity("ines",a1,5,80);
+		Celebrity c2 = new Celebrity("nuno", a1, 4, 70);
 		
 		platform.addCelebrity(c1);
 		platform.addCelebrity(c2);
-		VDMSeq test = platform.getCelebsWithActivity(a1);
-		System.out.println(a1);
-		System.out.println(c1.getActivity());
-		System.out.println("Oi: " + platform.getCelebrities().size() + " " + test.size());
 		
+		menuChooseUser();
 		
 	}
 	
@@ -140,25 +138,14 @@ public class Graphics {
 		listActivities();
 		
 		int activity = getIntChoice();
-		Activity a = null;
+		Activity a = getActivity(activity);
 		
-		if(activity == 1 ){
-			a = new Activity("Embassador");
-		}
-		else if (activity == 2){
-			a = new Activity("Entertainer");
-		}
-		else if (activity == 2){
-			a = new Activity ("Sponsor");
-		}
-		else System.out.println("Burro do crl");
-		
-		Celebrity c = new Celebrity(name,a, rating,price);
+		Celebrity c = new Celebrity(name,a,rating,price);
 		platform.addCelebrity(c);
 		
 	}
 	
-	private static void menuAgencyRegister(){
+	private static void menuAgencyRegister(Activity a, Celebrity c){
 		
 		System.out.println("**************************************************");
 		System.out.println("**********       Celebrity Register     **********");
@@ -168,6 +155,17 @@ public class Graphics {
 		String name = getStringChoice();
 		System.out.println("*          Insert funds available :              *");
 		int funds = getIntChoice();
+		
+		Agency ag = new Agency(name);
+		ag.addFunds(funds);
+		platform.addAgency(ag);
+		System.out.println("Registered agency successfully!");
+		
+		Service s = new Service(a);
+		s.addCelebrity(c);
+		ag.addService(s);
+		System.out.println("Contract finalized");
+		
 	}
 	
 	private static void menuListActivities(){
@@ -183,10 +181,22 @@ public class Graphics {
 		System.out.println("Choose the service you need");
 		
 		int service = getIntChoice();
-		
-		
+		Activity a = getActivity(service);
+		menuListCelebrities(a);
 	}
-
+	
+	public static void menuListCelebrities(Activity a){
+		
+		System.out.println("**************************************************");
+		System.out.println("**********       Celebrities to         **********");
+		System.out.println();
+		Celebrity c = listCelebrities(a);
+		System.out.println();
+		System.out.println("**************************************************");
+		System.out.println();
+		System.out.println("You've chosen " + c.name + ". To complete the contract, you have to register.");
+		menuAgencyRegister(a, c);
+	}
 	
 	public static int getIntChoice() {	
 		int input = -1;
@@ -227,6 +237,47 @@ public class Graphics {
 		    System.out.println("                  " + i + " - " + getActivityString(iter.next()));
 		    i++;
 		}
+	}
+	
+	public static Celebrity listCelebrities(Activity act){
+		
+		Iterator iter = platform.getCelebsWithActivity(act).iterator();
+		int i=1;
+		
+		while (iter.hasNext()) {
+			Celebrity c = (Celebrity) iter.next();
+		    System.out.println(i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice());
+		    i++;
+		}
+		
+		int choice = getIntChoice();
+		
+		int j = 1;
+		
+		iter = platform.getCelebsWithActivity(act).iterator();
+		while(iter.hasNext()){
+			Celebrity c = (Celebrity) iter.next();
+			if(j == choice){
+				return c;
+			}
+			j++;
+		}
+		return null;
+	}
+	
+	public static Activity getActivity(int choice){
+		
+		if(choice == 1 ){
+			return new Activity("Embassador");
+		}
+		else if (choice == 2){
+			return new Activity("Sponsor");
+		}
+		else if (choice == 2){
+			return new Activity ("Entertainer");
+		}
+		else return null;
+		
 	}
 }
 

@@ -20,7 +20,7 @@ operations
 		dcl i: int;
 		dcl celebs: seq of Celebrity := [];
 		for i = 1 to len celebrities do (
-			if celebrities(i).getActivity() = act
+			if celebrities(i).getActivity().name = act.name
 			then celebs := celebs ^ [celebrities(i)] ;
 		);
 		return celebs

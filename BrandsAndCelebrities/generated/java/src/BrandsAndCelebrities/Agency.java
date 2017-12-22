@@ -34,10 +34,9 @@ public class Agency {
     funds = funds.longValue() - qty.longValue();
   }
 
-  public void addService(final Activity act) {
+  public void addService(final Service srv) {
 
-    Service s = new Service(act);
-    services = SeqUtil.conc(Utils.copy(services), SeqUtil.seq(s));
+    services = SeqUtil.conc(Utils.copy(services), SeqUtil.seq(srv));
   }
 
   public void hireCelebrity(final Service serv, final Celebrity cel) {

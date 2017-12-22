@@ -26,11 +26,8 @@ operations
 	removeFunds(qty) == funds := funds - qty
 	pre funds >= qty;
 	
-	public addService : Activity ==> ()
-	addService(act) == (
-		dcl s : Service := new Service(act);
-		services := services ^ [s];
-	);
+	public addService : Service ==> ()
+	addService(srv) == services := services ^ [srv];
 	
 	public hireCelebrity : Service * Celebrity ==> ()
 	hireCelebrity(serv, cel) == (

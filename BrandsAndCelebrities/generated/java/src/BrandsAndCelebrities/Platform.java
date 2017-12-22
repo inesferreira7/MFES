@@ -30,7 +30,7 @@ public class Platform {
     long toVar_4 = celebrities.size();
 
     for (Long i_2 = 1L; i_2 <= toVar_4; i_2++) {
-      if (Utils.equals(((Celebrity) Utils.get(celebrities, i_2)).getActivity(), act)) {
+      if (Utils.equals(((Celebrity) Utils.get(celebrities, i_2)).getActivity().name, act.name)) {
         celebs =
             SeqUtil.conc(
                 Utils.copy(celebs), SeqUtil.seq(((Celebrity) Utils.get(celebrities, i_2))));
