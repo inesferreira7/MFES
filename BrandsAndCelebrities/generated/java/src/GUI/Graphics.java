@@ -395,7 +395,7 @@ public class Graphics {
 		else if (choice == 2){
 			return new Activity("Sponsor");
 		}
-		else if (choice == 2){
+		else if (choice == 3){
 			return new Activity ("Entertainer");
 		}
 		else return null;
