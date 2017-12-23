@@ -39,6 +39,20 @@ public class Platform {
     return Utils.copy(celebs);
   }
 
+  public Agency getAgencyByName(final String name) {
+
+    Agency a = null;
+    Number i = 0L;
+    long toVar_5 = agencies.size();
+
+    for (Long i_2 = 1L; i_2 <= toVar_5; i_2++) {
+      if (Utils.equals(((Agency) Utils.get(agencies, i_2)).name, name)) {
+        return ((Agency) Utils.get(agencies, i_2));
+      }
+    }
+    return a;
+  }
+
   public void addCelebrity(final Celebrity c) {
 
     celebrities = SeqUtil.conc(Utils.copy(celebrities), SeqUtil.seq(c));

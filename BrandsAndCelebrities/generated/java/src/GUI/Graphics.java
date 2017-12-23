@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 
-import org.overture.codegen.runtime.VDMSeq;
-
 import BrandsAndCelebrities.Activity;
 import BrandsAndCelebrities.Agency;
 import BrandsAndCelebrities.Celebrity;
@@ -26,6 +24,9 @@ public class Graphics {
 		
 		platform.addCelebrity(c1);
 		platform.addCelebrity(c2);
+		
+		Agency ag1 = new Agency("ola");
+		platform.addAgency(ag1);
 		
 		menuChooseUser();
 		
@@ -55,11 +56,11 @@ public class Graphics {
 			menuChooseUser();
 		}
 		else if (choice == 2){
-			System.out.println("Agencia");
+			clearScreen();
 			menuDivide();
 		}
 		else if(choice == 3){
-			menuListActivities(choice);
+			menuListActivities(choice, null);
 		}
 		else{
 			clearScreen();
@@ -70,6 +71,9 @@ public class Graphics {
 	
 	private static void menuDivide(){
 		
+		System.out.println("**************************************************");
+		System.out.println("**********            Agency            **********");
+		System.out.println("**************************************************");
 		System.out.println("**************************************************");
 		System.out.println("*                                                *");
 		System.out.println("*        1 - I don't have an account             *");
@@ -113,12 +117,18 @@ public class Graphics {
 		
 		if(choice == 1){
 			clearScreen();
-			menuListActivities(account);
+			menuListActivities(account, null);
 		}
 	}
 	
 	private static void menuAccount(int account){
 		
+		System.out.println("*             Insert agency name :               *");
+		String name = getStringChoice();
+		Agency ag = platform.getAgencyByName(name);
+		
+		System.out.println("**************************************************");
+		System.out.println("                       " + name);
 		System.out.println("**************************************************");
 		System.out.println("*                                                *");
 		System.out.println("*       1 - Consult services available           *");
@@ -131,7 +141,7 @@ public class Graphics {
 		
 		if(choice ==1){
 			clearScreen();
-			menuListActivities(account);
+			menuListActivities(account, ag);
 		}
 	}
 	
@@ -161,12 +171,12 @@ public class Graphics {
 	private static void menuAgencyRegister(Activity a, Celebrity c){
 		
 		System.out.println("**************************************************");
-		System.out.println("**********       Celebrity Register     **********");
+		System.out.println("**********        Agency Register       **********");
 		System.out.println("**************************************************");
 		System.out.println("*                                                *");
 		System.out.println("*             Insert agency name :               *");
 		String name = getStringChoice();
-		System.out.println("*          Insert funds available :              *");
+		System.out.println("*           Insert funds available :             *");
 		int funds = getIntChoice();
 		
 		Agency ag = new Agency(name);
@@ -174,14 +184,17 @@ public class Graphics {
 		platform.addAgency(ag);
 		System.out.println("Registered agency successfully!");
 		
+		contract(ag,c,a);	
+	}
+	
+	public static void contract(Agency ag, Celebrity c, Activity a){
 		Service s = new Service(a);
 		s.addCelebrity(c);
 		ag.addService(s);
-		System.out.println("Contract finalized");
-		
+		System.out.println("Contract finalized with " + c.name);
 	}
 	
-	private static void menuListActivities(int account){
+	private static void menuListActivities(int account, Agency ag){
 		
 		System.out.println("**************************************************");
 		System.out.println("**********           Services           **********");
@@ -195,24 +208,23 @@ public class Graphics {
 		
 		int service = getIntChoice();
 		Activity a = getActivity(service);
-		menuListCelebrities(a, account);
+		menuListCelebrities(a, account, ag);
 	}
 	
-	public static void menuListCelebrities(Activity a, int account){
+	public static void menuListCelebrities(Activity a, int account, Agency ag){
 		
 		System.out.println("**************************************************");
-		System.out.println("**********       Celebrities to         **********");
+		System.out.println("**********          Celebrities         **********");
 		System.out.println();
 		Celebrity c = listCelebrities(a);
 		System.out.println();
-		System.out.println("**************************************************");
-		System.out.println();
 		if(account == 1){
-		System.out.println("You've chosen " + c.name + ". To complete the contract, you have to register.");
-		menuAgencyRegister(a, c);
+			clearScreen();
+			System.out.println("You've chosen " + c.name + ". To complete the contract, you have to register.");
+			menuAgencyRegister(a, c);
 		}
 		else if(account == 2){
-			System.out.println("You've chosen " + c.name + ". Contract finalized!");
+			contract(ag,c,a);
 		}
 		else if(account == 3){
 			System.out.println("Enter platform as an agency to make a contract!");
@@ -272,6 +284,9 @@ public class Graphics {
 		    System.out.println(i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice());
 		    i++;
 		}
+		System.out.println("                                                  ");
+		System.out.println("**************************************************");
+		System.out.println("                                                  ");
 		
 		int choice = getIntChoice();
 		

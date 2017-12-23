@@ -26,6 +26,18 @@ operations
 		return celebs
 	);
 	
+		
+	public getAgencyByName : seq1 of char ==> Agency
+	getAgencyByName(name) == (
+		dcl a: Agency;
+		dcl i:int;		
+		for i = 1 to len agencies do (
+			if agencies(i).name = name
+			then return agencies(i);
+		);
+		return a
+	);
+	
 	public addCelebrity : Celebrity ==> ()
 	addCelebrity(c) == celebrities := celebrities ^ [c];
 	
