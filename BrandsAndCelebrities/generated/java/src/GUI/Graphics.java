@@ -119,6 +119,11 @@ public class Graphics {
 			clearScreen();
 			menuListActivities(account, null);
 		}
+		
+		if(choice == 2){
+			clearScreen();
+			menuChooseUser();
+		}
 	}
 	
 	private static void menuAccount(int account){
@@ -142,6 +147,39 @@ public class Graphics {
 		if(choice ==1){
 			clearScreen();
 			menuListActivities(account, ag);
+		}
+		
+		if(choice == 2){
+			clearScreen();
+			menuListContracts(ag);
+		}
+		
+		if(choice == 3){
+			clearScreen();
+			menuChooseUser();
+		}
+	}
+	
+	public static void menuListContracts(Agency ag){
+		
+		System.out.println("**************************************************");
+		System.out.println("               " + ag.name );
+		System.out.println("**************************************************");
+		System.out.println();
+		
+		Iterator it = ag.getServices().iterator();
+		int i=1;
+		while(it.hasNext()){
+			Service s = (Service) it.next();
+			System.out.print(i + " - Service: " + s.getActivity().name + "   Celebrities: ");
+			Iterator iter = s.getCelebrities().iterator();
+			int j=1;
+			while(iter.hasNext()){
+				Celebrity c = (Celebrity) iter.next();
+				System.out.print(c.name + "   ");
+				j++;
+			}
+			i++;
 		}
 	}
 	
@@ -191,7 +229,10 @@ public class Graphics {
 		Service s = new Service(a);
 		s.addCelebrity(c);
 		ag.addService(s);
+		clearScreen();
 		System.out.println("Contract finalized with " + c.name);
+		System.out.println();
+		menuChooseUser();
 	}
 	
 	private static void menuListActivities(int account, Agency ag){

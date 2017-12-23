@@ -24,6 +24,11 @@ public class Agency {
     return funds;
   }
 
+  public VDMSeq getServices() {
+
+    return Utils.copy(services);
+  }
+
   public void addFunds(final Number qty) {
 
     funds = funds.longValue() + qty.longValue();
