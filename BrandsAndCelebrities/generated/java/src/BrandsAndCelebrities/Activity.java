@@ -1,10 +1,11 @@
 package BrandsAndCelebrities;
 
 import java.util.*;
+import java.io.Serializable;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
-public class Activity {
+public class Activity implements Serializable{
   public String name;
 
   public void cg_init_Activity_1(final String nm) {

@@ -1,10 +1,11 @@
 package BrandsAndCelebrities;
 
 import java.util.*;
+import java.io.Serializable;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
-public class Service {
+public class Service implements Serializable{
   private Activity activity;
   private VDMSeq celebs = SeqUtil.seq();
 

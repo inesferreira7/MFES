@@ -1,10 +1,11 @@
 package BrandsAndCelebrities;
 
 import java.util.*;
+import java.io.Serializable;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
-public class Platform {
+public class Platform implements Serializable{
   public static final VDMSet Activity =
       SetUtil.set(
           BrandsAndCelebrities.quotes.EmbassadorQuote.getInstance(),

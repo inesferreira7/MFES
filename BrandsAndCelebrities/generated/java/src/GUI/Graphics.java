@@ -1,7 +1,6 @@
 package GUI;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Iterator;
 
 import BrandsAndCelebrities.Activity;
@@ -16,20 +15,53 @@ public class Graphics {
 	private static Platform platform = null;
 	
 	public static void main(String [] args){
-		platform = new Platform();
 		
-		Activity a1 = new Activity("Embassador");
-		Celebrity c1 = new Celebrity("ines",a1,5,80);
-		Celebrity c2 = new Celebrity("nuno", a1, 4, 70);
-		
-		platform.addCelebrity(c1);
-		platform.addCelebrity(c2);
-		
-		Agency ag1 = new Agency("ola");
-		platform.addAgency(ag1);
-		
+		initializePlatform();
+		System.out.print(platform);
 		menuChooseUser();
-		
+		return;
+	}
+	
+	private static void initializePlatform() {
+		File f = new File("./src/info.txt");
+		if(f.exists() && !f.isDirectory()) { 
+			 try {
+			     FileInputStream streamIn = new FileInputStream("./src/info.txt");
+			     ObjectInputStream objectinputstream = new ObjectInputStream(streamIn);
+			     platform = (Platform) objectinputstream.readObject();
+			 } catch (Exception e) {
+			     e.printStackTrace();
+			 }
+		}
+		else {
+			platform = new Platform();
+			
+			Activity a1 = new Activity("Embassador");
+			Celebrity c1 = new Celebrity("ines",a1,5,80);
+			Celebrity c2 = new Celebrity("nuno", a1, 4, 70);
+			
+			platform.addCelebrity(c1);
+			platform.addCelebrity(c2);
+			
+			Agency ag1 = new Agency("ola");
+			platform.addAgency(ag1);
+		}
+	}
+	
+	private static void writeInfo() throws IOException {
+		ObjectOutputStream oos = null;
+		FileOutputStream fout = null;
+		try{
+		    fout = new FileOutputStream("./src/info.txt", true);
+		    oos = new ObjectOutputStream(fout);
+		    oos.writeObject(platform);
+		} catch (Exception ex) {
+		    ex.printStackTrace();
+		} finally {
+		    if(oos != null){
+		        oos.close();
+		    }
+		}
 	}
 	
 	private static void menuChooseUser(){
@@ -44,6 +76,8 @@ public class Graphics {
 		System.out.println("*                                                *");
 		System.out.println("*        3 - Consult available services          *");
 		System.out.println("*                                                *");
+		System.out.println("*                                                *");
+		System.out.println("*                    4 - Exit                    *");
 		System.out.println("**************************************************");
 		
 		int choice = getIntChoice();
@@ -61,6 +95,15 @@ public class Graphics {
 		}
 		else if(choice == 3){
 			menuListActivities(choice, null);
+		}
+		else if(choice == 4) {
+			try {
+				writeInfo();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return;
 		}
 		else{
 			clearScreen();
@@ -222,13 +265,13 @@ public class Graphics {
 		platform.addAgency(ag);
 		System.out.println("Registered agency successfully!");
 		
-		contract(ag,c,a);	
+		contract(ag,c,a);
 	}
 	
 	public static void contract(Agency ag, Celebrity c, Activity a){
 		Service s = new Service(a);
-		s.addCelebrity(c);
 		ag.addService(s);
+		ag.hireCelebrity(s, c);		
 		clearScreen();
 		System.out.println("Contract finalized with " + c.name);
 		System.out.println();

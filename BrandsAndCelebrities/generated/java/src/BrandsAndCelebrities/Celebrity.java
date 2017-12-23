@@ -1,10 +1,11 @@
 package BrandsAndCelebrities;
 
 import java.util.*;
+import java.io.Serializable;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
-public class Celebrity {
+public class Celebrity implements Serializable{
   public String name;
   private Activity activity;
   private Number rating;
