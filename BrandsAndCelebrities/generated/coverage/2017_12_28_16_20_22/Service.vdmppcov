@@ -1,0 +1,49 @@
+class Service
+types
+
+values
+
+instance variables
+
+	private activity : Activity;
+	private celebs : seq of Celebrity := [];
+	
+operations
+
+	public Service : Activity ==> Service
+	Service(act) == (
+	activity := act;
+	)
+	post activity = act and celebs = [];
+	
+	public getActivity : () ==> Activity
+	getActivity() == return activity;
+	
+	pure public getCelebrities : () ==> seq of Celebrity
+	getCelebrities() == return celebs;
+
+	public addCelebrity : Celebrity ==> ()
+	addCelebrity(c) == (
+	celebs := celebs ^ [c];
+	)
+	pre c not in set elems celebs and activity in set elems c.getActivities()
+	post c in set elems celebs and len celebs = len celebs~ + 1;
+	
+	public removeCelebrity : Celebrity ==> ()
+	removeCelebrity(c) == (
+		dcl i: int;
+		dcl new_celebs: seq of Celebrity := [];
+		for i = 1 to len celebs do (
+			if celebs(i) <> c
+			then new_celebs := new_celebs ^ [celebs(i)]
+		);
+		celebs := new_celebs;
+	)
+	pre c in set elems celebs
+	post c not in set elems celebs and len celebs = len celebs~ - 1
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Service

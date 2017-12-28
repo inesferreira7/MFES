@@ -22,7 +22,7 @@ operations
 		dcl celebs: seq of Celebrity := [];
 		for i = 1 to len celebrities do (
 			for j = 1 to len celebrities(i).getActivities() do (
-			if celebrities(i).getActivities()(j).name = act.name
+			if celebrities(i).getActivities()(i).name = act.name
 				then celebs := celebs ^ [celebrities(i)] ;
 		);
 		);
@@ -41,16 +41,6 @@ operations
 		return a
 	);
 	
-	public getCelebrityByName : seq1 of char ==> Celebrity
-	getCelebrityByName(name) == (
-		dcl cel : Celebrity;
-		for i = 1 to len celebrities do (
-			if celebrities(i).name = name
-			then return celebrities(i)
-		);
-		return cel;
-	);
-	
 	
 	public addCelebrity : Celebrity ==> ()
 	addCelebrity(c) == (
@@ -66,32 +56,6 @@ operations
 	
 	public getCelebrities : () ==> seq of Celebrity
 	getCelebrities() == return celebrities;
-	
-	public getAgencies : () ==> seq of Agency
-	getAgencies() == return agencies;
-	
-	public getCelebrityContracts : Celebrity ==> seq of Agency
-	getCelebrityContracts(c) == (
-		dcl ret : seq of Agency := [];
-		for i = 1 to len agencies do (
-			for j = 1 to len agencies(i).getServices() do (
-				if c in set elems agencies(i).getServices()(j).getCelebrities()
-				then ret := ret ^ [agencies(i)];
-			)
-		);
-		return ret;
-	);
-	
-	public removeActivityFromCelebrity : Celebrity * Activity ==> ()
-	removeActivityFromCelebrity(c, act) == (
-		c.removeActivity(act);
-		for i = 1 to len agencies do(
-			for j = 1 to len agencies(i).getServices() do (
-				if c in set elems agencies(i).getServices()(j).getCelebrities()
-				then agencies(i).fireCelebrity(agencies(i).getServices()(j), c)
-			)
-		)
-	)
 	
 functions
 -- TODO Define functiones here

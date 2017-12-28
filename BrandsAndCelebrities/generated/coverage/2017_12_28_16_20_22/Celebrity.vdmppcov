@@ -37,25 +37,6 @@ operations
 	)
 	pre a not in set elems activities 
 	post a in set elems activities and len activities = len activities~ + 1;
-	
-	public removeActivity : Activity ==> ()
-	removeActivity(a) == (
-		dcl new_act: seq of Activity := [];
-		for i = 1 to len activities do (
-			if activities(i) <> a
-			then new_act := new_act ^ [activities(i)]
-		);
-		activities := new_act;
-	);
-	
-	public hasActivity : seq1 of char ==> bool
-	hasActivity(a) == (
-		for i = 1 to len activities do (
-			if activities(i).name = a
-			then return true;
-		);
-		return false;
-	)
 
 	
 functions
