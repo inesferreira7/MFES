@@ -240,7 +240,7 @@ public class Graphics {
 	    }
 	    else if (choice == 2) {
 	    	clearScreen();
-	    	//TODO list activities
+	    	menuListCelebrityActivities(cel);
 	    }
 	    else if (choice == 3) {
 	    	clearScreen();
@@ -248,7 +248,7 @@ public class Graphics {
 	    }
 	    else if (choice == 4) {
 	    	clearScreen();
-	    	//TODO remove activity
+	    	menuRemoveCelebrityActivities(cel);
 	    }
 	    else if (choice == 0) {
 	    	clearScreen();
@@ -507,24 +507,54 @@ public class Graphics {
   
   public static void menuListCelebrityActivities(Celebrity cel) {
 	    System.out.println("**************************************************"); 
-	    System.out.println("        " + cel.name + " - Activities");
+	    System.out.println("                " + cel.name + " - Activities");
 	    System.out.println("**************************************************");
 	    System.out.println();
-	    //TODO resto da função
+
+	    Iterator it = cel.getActivities().iterator();
+	    int i = 1;
+	    
+	    while(it.hasNext()) {
+	    	Activity a = (Activity) it.next();
+	    	System.out.println("              " + i + " - " + a.name);
+	    	i++;
+	    }
+	    
+	    System.out.println();
+	    System.out.println("              0 - Back");
+	    
+	    int choice = getIntChoice();
+	    
+	    if(choice == 0) {
+	    	clearScreen();
+	    	menuRegisteredCelebrity(cel);
+	    }
+	    else if (choice != 0 && choice <= cel.getActivities().size()) {
+	    	clearScreen();
+	    	Activity act = (Activity) cel.getActivities().get(i);
+	    	platform.removeActivityFromCelebrity(cel, act);
+	    	menuRegisteredCelebrity(cel);
+	    }
+	    else {
+	        clearScreen(); 
+	        System.out.println("Please enter a valid option");
+	        menuRemoveCelebrityActivities(cel);
+	    }
   }
   
   public static void menuRemoveCelebrityActivities(Celebrity cel) {
 	    System.out.println("**************************************************"); 
-	    System.out.println("        " + cel.name + " - Activities");
+	    System.out.println("                " + cel.name + " - Activities");
 	    System.out.println("**************************************************");
 	    System.out.println();
-	    //TODO resto da função
+
 	    Iterator it = cel.getActivities().iterator();
 	    int i = 1;
 	    
 	    while(it.hasNext()) {
 	    	Activity a = (Activity) it.next();
 	    	System.out.println("      " + i + " - " + a.name);
+	    	i++;
 	    }
 	    
 	    System.out.println();
@@ -538,7 +568,7 @@ public class Graphics {
 	    }
 	    else if (choice != 0 && choice <= cel.getActivities().size()) {
 	    	clearScreen();
-	    	Activity act = (Activity) cel.getActivities().get(i);
+	    	Activity act = (Activity) cel.getActivities().get(choice-1);
 	    	platform.removeActivityFromCelebrity(cel, act);
 	    	menuRegisteredCelebrity(cel);
 	    }
