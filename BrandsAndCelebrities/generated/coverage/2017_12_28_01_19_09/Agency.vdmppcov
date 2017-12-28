@@ -1,0 +1,63 @@
+class Agency
+types
+-- TODO Define types here
+	public String = seq1 of char;
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	public name : String;
+	private funds : nat := 0;
+	private services : seq of Service := [];
+	
+operations
+-- TODO Define operations here
+	public Agency : String ==> Agency
+	Agency(nm) == (
+	name := nm;
+	)
+	post name=nm and funds = 0 and services =[];
+	
+	public getFunds : () ==> nat
+	getFunds() == return funds;
+	
+	public getServices : () ==> seq of Service
+	getServices() == return services;
+	
+	public addFunds : int ==> ()
+	addFunds(qty) == funds := funds + qty
+	--pre qty >= 0
+	post funds >= funds~;
+	
+	public removeFunds : nat ==> ()
+	removeFunds(qty) == funds := funds - qty
+	pre funds >= qty;
+	
+	public addService : Service ==> ()
+	addService(srv) == services := services ^ [srv];
+	
+	public hireCelebrity : Service * Celebrity ==> ()
+	hireCelebrity(serv, cel) == (
+		dcl i: int;
+		for i = 1 to len services do (
+			if services(i) = serv
+			then (
+				services(i).addCelebrity(cel);
+				removeFunds(cel.getPrice());
+			)
+		);
+	);
+	
+	public fireCelebrity : Celebrity ==> ()
+	fireCelebrity(cel) == (
+		dcl i: int;
+		for i = 1 to len services do (
+			services(i).removeCelebrity(cel);
+		);	
+	)
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Agency

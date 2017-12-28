@@ -1,37 +1,46 @@
 class Celebrity
 types
--- TODO Define types here
+
 	public String = seq1 of char;
+	
 values
--- TODO Define values here
+
 instance variables
--- TODO Define instance variables here
-	public name: String;
-	private activity: Activity;
+
+	public name: String; 
+	private activities: seq of Activity := []; --actividades que celebridade poderá fazer
 	private rating: nat1;
 	private price: nat1;
 	
 operations
--- TODO Define operations here
-	public Celebrity : String * Activity * nat1 * nat1 ==> Celebrity
-	Celebrity(nm, act, rt, prc) == (
+
+	public Celebrity : String * nat1 ==> Celebrity
+	Celebrity(nm, prc) == (
 		name := nm;
-		activity := act;
-		rating := rt;
+		rating := MATH`rand(4)+1;
 		price := prc;
-	);
+	)
+	post name = nm and price = prc and activities =[] and rating > 0 and rating < 6;
 	
-	public getActivity : () ==> Activity
-	getActivity() == return activity;
+	pure public getActivities : () ==> seq of Activity
+	getActivities() == return activities;
 
 	public getRating : () ==> nat1
 	getRating() == return rating;
 	
-	public getPrice : () ==> nat1
+	pure public getPrice : () ==> nat1
 	getPrice() == return price;
 	
+	public addActivity : Activity ==> ()
+	addActivity(a) == (
+	activities := activities ^ [a];
+	)
+	pre a not in set elems activities 
+	post a in set elems activities and len activities = len activities~ + 1;
+
+	
 functions
--- TODO Define functiones here
+ 
 traces
 -- TODO Define Combinatorial Test Traces here
 end Celebrity

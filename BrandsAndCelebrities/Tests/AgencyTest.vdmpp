@@ -7,7 +7,7 @@ instance variables
 -- TODO Define instance variables here
 	a : Agency := new Agency("test");
 	act : Activity := new Activity("test");
-	c : Celebrity :=  new Celebrity("Test Celebrity", act, 5, 35);
+	c : Celebrity :=  new Celebrity("Test Celebrity", 35);
 	s : Service := new Service(act);
 	
 operations
@@ -47,7 +47,7 @@ operations
 		assertTrue(a.getServices()(1).getCelebrities() = [c]);
 		IO`print("Celebrities hired to that service: "); IO`print(a.getServices()(1).getCelebrities()(1)); IO`print("\n");
 		IO`print("Firing the previous celebrity from the service...\n");
-		a.fireCelebrity(c);
+		-- a.fireCelebrity(c); AGORA A FUNÇAO TEM MAIS UM ARGUMENTO
 		assertTrue(a.getServices()(1).getCelebrities() = []);
 		IO`print("Celebrities hired to that service: "); IO`print(len a.getServices()(1).getCelebrities()); IO`print("\n");
 	);

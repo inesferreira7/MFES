@@ -1,11 +1,10 @@
 package BrandsAndCelebrities;
 
 import java.util.*;
-import java.io.Serializable;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
-public class Platform implements Serializable{
+public class Platform {
   public static final VDMSet Activity =
       SetUtil.set(
           BrandsAndCelebrities.quotes.EmbassadorQuote.getInstance(),
@@ -28,15 +27,6 @@ public class Platform implements Serializable{
 
     Number i = 0L;
     VDMSeq celebs = SeqUtil.seq();
-    long toVar_4 = celebrities.size();
-
-    for (Long i_2 = 1L; i_2 <= toVar_4; i_2++) {
-      if (Utils.equals(((Celebrity) Utils.get(celebrities, i_2)).getActivity().name, act.name)) {
-        celebs =
-            SeqUtil.conc(
-                Utils.copy(celebs), SeqUtil.seq(((Celebrity) Utils.get(celebrities, i_2))));
-      }
-    }
     return Utils.copy(celebs);
   }
 
@@ -44,9 +34,9 @@ public class Platform implements Serializable{
 
     Agency a = null;
     Number i = 0L;
-    long toVar_5 = agencies.size();
+    long toVar_3 = agencies.size();
 
-    for (Long i_2 = 1L; i_2 <= toVar_5; i_2++) {
+    for (Long i_2 = 1L; i_2 <= toVar_3; i_2++) {
       if (Utils.equals(((Agency) Utils.get(agencies, i_2)).name, name)) {
         return ((Agency) Utils.get(agencies, i_2));
       }

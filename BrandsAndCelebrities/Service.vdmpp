@@ -1,25 +1,33 @@
 class Service
 types
--- TODO Define types here
+
 values
--- TODO Define values here
+
 instance variables
--- TODO Define instance variables here
+
 	private activity : Activity;
 	private celebs : seq of Celebrity := [];
+	
 operations
--- TODO Define operations here
+
 	public Service : Activity ==> Service
-	Service(act) == activity := act;
+	Service(act) == (
+	activity := act;
+	)
+	post activity = act and celebs = [];
 	
 	public getActivity : () ==> Activity
 	getActivity() == return activity;
 	
-	public getCelebrities : () ==> seq of Celebrity
+	pure public getCelebrities : () ==> seq of Celebrity
 	getCelebrities() == return celebs;
 
 	public addCelebrity : Celebrity ==> ()
-	addCelebrity(c) == celebs := celebs ^ [c];
+	addCelebrity(c) == (
+	celebs := celebs ^ [c];
+	)
+	pre c not in set elems celebs and activity in set elems c.getActivities()
+	post c in set elems celebs and len celebs = len celebs~ + 1;
 	
 	public removeCelebrity : Celebrity ==> ()
 	removeCelebrity(c) == (
@@ -30,7 +38,10 @@ operations
 			then new_celebs := new_celebs ^ [celebs(i)]
 		);
 		celebs := new_celebs;
-	);
+	)
+	pre c in set elems celebs
+	post c not in set elems celebs and len celebs = len celebs~ - 1
+	
 functions
 -- TODO Define functiones here
 traces

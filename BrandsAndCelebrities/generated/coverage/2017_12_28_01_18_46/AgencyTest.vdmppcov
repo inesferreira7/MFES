@@ -1,0 +1,73 @@
+class AgencyTest
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	a : Agency := new Agency("test");
+	act : Activity := new Activity("test");
+	c : Celebrity :=  new Celebrity("Test Celebrity", 35);
+	s : Service := new Service(act);
+	
+operations
+-- TODO Define operations here
+	private assertTrue: bool ==> ()
+	assertTrue(cond) == return
+	pre cond;
+	
+	private testAddRemoveFunds: () ==> ()
+	testAddRemoveFunds() == (
+		IO`print("\n* Test adding and removing funds to an Agency *\n");
+		IO`print("Current Funds: "); IO`print(a.getFunds()); IO`print("€\n");
+		IO`print("Adding 100€...\n");
+		a.addFunds(100);
+		assertTrue(a.getFunds() = 100);
+		IO`print("Current Funds: "); IO`print(a.getFunds()); IO`print("€\n");
+		IO`print("Removing 50€...\n");
+		a.removeFunds(50);
+		assertTrue(a.getFunds() = 50);
+		IO`print("Current Funds: "); IO`print(a.getFunds()); IO`print("€\n");
+	);
+	
+	private testHireFireCelebritytoService: () ==> ()
+	testHireFireCelebritytoService() == (
+		IO`print("\n* Test hiring and firing celebrities to the Agency *\n");
+		IO`print("\nAdding 100€ to the funds...\n");
+		a.addFunds(100);
+		IO`print("Adding a new service to the Agency...\n");
+		assertTrue(a.getServices() = []);
+		a.addService(s);
+		assertTrue(a.getServices() = [s]);
+		IO`print("Services of the Agency: "); IO`print(a.getServices()(1)); IO`print("\n");
+		IO`print("Celebrities hired to that service: "); IO`print(len a.getServices()(1).getCelebrities()); IO`print("\n");
+		assertTrue(a.getServices()(1).getCelebrities() = []);
+		IO`print("Adding a new celebrity to the service...\n");
+		a.hireCelebrity(s, c);
+		assertTrue(a.getServices()(1).getCelebrities() = [c]);
+		IO`print("Celebrities hired to that service: "); IO`print(a.getServices()(1).getCelebrities()(1)); IO`print("\n");
+		IO`print("Firing the previous celebrity from the service...\n");
+		a.fireCelebrity(c);
+		assertTrue(a.getServices()(1).getCelebrities() = []);
+		IO`print("Celebrities hired to that service: "); IO`print(len a.getServices()(1).getCelebrities()); IO`print("\n");
+	);
+	
+	private testGets: () ==> ()
+	testGets() == (
+		IO`print("\nTesting get functions...\n");
+		assertTrue(a.getFunds() = 0);
+		assertTrue(a.getServices() = []);
+	);
+	
+	public static runTests: () ==> ()
+	runTests() == (
+		IO`print("*** Running Agency tests ***\n");
+		new AgencyTest().testAddRemoveFunds();
+		new AgencyTest().testHireFireCelebritytoService();
+		new AgencyTest().testGets()
+	)
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end AgencyTest

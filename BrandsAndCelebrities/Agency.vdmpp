@@ -13,7 +13,10 @@ instance variables
 operations
 -- TODO Define operations here
 	public Agency : String ==> Agency
-	Agency(nm) == name := nm;
+	Agency(nm) == (
+	name := nm;
+	)
+	post name=nm and funds = 0 and services =[];
 	
 	public getFunds : () ==> nat
 	getFunds() == return funds;
@@ -23,14 +26,22 @@ operations
 	
 	public addFunds : nat ==> ()
 	addFunds(qty) == funds := funds + qty
-	pre qty >= 0;
+	pre qty >= 0
+	post funds >= funds~;
 	
 	public removeFunds : nat ==> ()
 	removeFunds(qty) == funds := funds - qty
-	pre funds >= qty;
+	pre funds >= qty
+	post funds >= 0 and funds <= funds~;
 	
 	public addService : Service ==> ()
-	addService(srv) == services := services ^ [srv];
+	addService(srv) == (
+	services := services ^ [srv];
+	)
+	pre srv not in set elems services
+	post srv in set elems services and len services = len services~ + 1;
+	
+	
 	
 	public hireCelebrity : Service * Celebrity ==> ()
 	hireCelebrity(serv, cel) == (
@@ -42,15 +53,20 @@ operations
 				removeFunds(cel.getPrice());
 			)
 		);
-	);
+	)
+	pre serv in set elems services and cel not in set elems serv.getCelebrities() and cel.getPrice() <= funds
+	post cel in set elems serv.getCelebrities() and funds <= funds~;
 	
-	public fireCelebrity : Celebrity ==> ()
-	fireCelebrity(cel) == (
+	public fireCelebrity : Service * Celebrity ==> ()
+	fireCelebrity(serv, cel) == (
 		dcl i: int;
 		for i = 1 to len services do (
-			services(i).removeCelebrity(cel);
+		if services(i) = serv
+			then services(i).removeCelebrity(cel);
 		);	
 	)
+	pre serv in set elems services and cel in set elems serv.getCelebrities()
+	post cel not in set elems serv.getCelebrities();
 	
 functions
 -- TODO Define functiones here

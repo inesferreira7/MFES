@@ -1,33 +1,30 @@
 package BrandsAndCelebrities;
 
 import java.util.*;
-import java.io.Serializable;
 import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
-public class Celebrity implements Serializable{
+public class Celebrity {
   public String name;
-  private Activity activity;
+  private VDMSeq activities = SeqUtil.seq();
   private Number rating;
   private Number price;
 
-  public void cg_init_Celebrity_1(
-      final String nm, final Activity act, final Number rt, final Number prc) {
+  public void cg_init_Celebrity_1(final String nm, final Number prc) {
 
     name = nm;
-    activity = act;
-    rating = rt;
+    rating = MATH.rand(4L).longValue() + 1L;
     price = prc;
   }
 
-  public Celebrity(final String nm, final Activity act, final Number rt, final Number prc) {
+  public Celebrity(final String nm, final Number prc) {
 
-    cg_init_Celebrity_1(nm, act, rt, prc);
+    cg_init_Celebrity_1(nm, prc);
   }
 
-  public Activity getActivity() {
+  public VDMSeq getActivities() {
 
-    return activity;
+    return Utils.copy(activities);
   }
 
   public Number getRating() {
@@ -40,6 +37,11 @@ public class Celebrity implements Serializable{
     return price;
   }
 
+  public void addActivity(final Activity a) {
+
+    activities = SeqUtil.conc(Utils.copy(activities), SeqUtil.seq(a));
+  }
+
   public Celebrity() {}
 
   public String toString() {
@@ -47,8 +49,8 @@ public class Celebrity implements Serializable{
     return "Celebrity{"
         + "name := "
         + Utils.toString(name)
-        + ", activity := "
-        + Utils.toString(activity)
+        + ", activities := "
+        + Utils.toString(activities)
         + ", rating := "
         + Utils.toString(rating)
         + ", price := "

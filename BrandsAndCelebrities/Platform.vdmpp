@@ -18,10 +18,13 @@ operations
 	public getCelebsWithActivity : Activity ==> seq of Celebrity
 	getCelebsWithActivity(act) == (
 		dcl i: int;
+		dcl j: int;
 		dcl celebs: seq of Celebrity := [];
 		for i = 1 to len celebrities do (
-			if celebrities(i).getActivity().name = act.name
-			then celebs := celebs ^ [celebrities(i)] ;
+			for j = 1 to len celebrities(i).getActivities() do (
+			if celebrities(i).getActivities()(i).name = act.name
+				then celebs := celebs ^ [celebrities(i)] ;
+		);
 		);
 		return celebs
 	);
@@ -38,11 +41,18 @@ operations
 		return a
 	);
 	
+	
 	public addCelebrity : Celebrity ==> ()
-	addCelebrity(c) == celebrities := celebrities ^ [c];
+	addCelebrity(c) == (
+	celebrities := celebrities ^ [c]
+	)
+	pre c not in set elems celebrities
+	post c in set elems celebrities and len celebrities = len celebrities~ + 1;
 	
 	public addAgency : Agency ==> ()
-	addAgency(a) == agencies := agencies ^ [a];
+	addAgency(a) == agencies := agencies ^ [a]
+	pre a not in set elems agencies
+	post a in set elems agencies and len agencies = len agencies~ + 1;
 	
 	public getCelebrities : () ==> seq of Celebrity
 	getCelebrities() == return celebrities;

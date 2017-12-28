@@ -1,0 +1,46 @@
+class Celebrity
+types
+
+	public String = seq1 of char;
+	
+values
+
+instance variables
+
+	public name: String; 
+	private activities: seq of Activity := []; --actividades que celebridade poderá fazer
+	private rating: nat1;
+	private price: nat1;
+	
+operations
+
+	public Celebrity : String * nat1 ==> Celebrity
+	Celebrity(nm, prc) == (
+		name := nm;
+		rating := MATH`rand(4)+1;
+		price := prc;
+	)
+	post name = nm and price = prc and activities =[] and rating > 0 and rating < 6;
+	
+	pure public getActivities : () ==> seq of Activity
+	getActivities() == return activities;
+
+	public getRating : () ==> nat1
+	getRating() == return rating;
+	
+	public getPrice : () ==> nat1
+	getPrice() == return price;
+	
+	public addActivity : Activity ==> ()
+	addActivity(a) == (
+	activities := activities ^ [a];
+	)
+	pre a not in set elems activities 
+	post a in set elems activities and len activities = len activities~ + 1;
+
+	
+functions
+ 
+traces
+-- TODO Define Combinatorial Test Traces here
+end Celebrity
