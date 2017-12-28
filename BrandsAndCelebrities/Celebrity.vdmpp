@@ -11,6 +11,7 @@ instance variables
 	private activities: seq of Activity := []; --actividades que celebridade poderá fazer
 	private rating: nat1;
 	private price: nat1;
+	inv validRating(rating);
 	
 operations
 
@@ -59,6 +60,9 @@ operations
 
 	
 functions
+	
+	public validRating : nat1 -> bool
+	validRating(r) == r> 0 and r < 6;
  
 traces
 -- TODO Define Combinatorial Test Traces here

@@ -7,8 +7,10 @@ instance variables
 -- TODO Define instance variables here
 	a : Agency := new Agency("test");
 	act : Activity := new Activity("test");
+	act2 : Activity := new Activity("test2");
 	c : Celebrity :=  new Celebrity("Test Celebrity", 35);
 	s : Service := new Service(act);
+	s2: Service := new Service(act2);
 	
 operations
 -- TODO Define operations here
@@ -60,12 +62,26 @@ operations
 		assertTrue(a.getServices() = []);
 	);
 	
+	private testServiceByCelebrity: () ==> ()
+	testServiceByCelebrity() == (
+	c.addActivity(act);
+	c.addActivity(act2);
+	s.addCelebrity(c);
+	s2.addCelebrity(c);
+	a.addService(s);
+	a.addService(s2);
+	
+	assertTrue(a.findServiceByCelebrity(c) = [s, s2]);
+	
+	);
+	
 	public static runTests: () ==> ()
 	runTests() == (
 		IO`print("*** Running Agency tests ***\n");
 		new AgencyTest().testAddRemoveFunds();
 		new AgencyTest().testHireFireCelebritytoService();
-		new AgencyTest().testGets()
+		new AgencyTest().testGets();
+		new AgencyTest().testServiceByCelebrity();
 	)
 functions
 -- TODO Define functiones here
