@@ -36,6 +36,7 @@ operations
 		IO`print("\nAdding 100€ to the funds...\n");
 		a.addFunds(100);
 		IO`print("Adding a new service to the Agency...\n");
+		c.addActivity(act);
 		assertTrue(a.getServices() = []);
 		a.addService(s);
 		assertTrue(a.getServices() = [s]);
@@ -47,7 +48,7 @@ operations
 		assertTrue(a.getServices()(1).getCelebrities() = [c]);
 		IO`print("Celebrities hired to that service: "); IO`print(a.getServices()(1).getCelebrities()(1)); IO`print("\n");
 		IO`print("Firing the previous celebrity from the service...\n");
-		-- a.fireCelebrity(c); AGORA A FUNÇAO TEM MAIS UM ARGUMENTO
+		a.fireCelebrity(s,c);
 		assertTrue(a.getServices()(1).getCelebrities() = []);
 		IO`print("Celebrities hired to that service: "); IO`print(len a.getServices()(1).getCelebrities()); IO`print("\n");
 	);

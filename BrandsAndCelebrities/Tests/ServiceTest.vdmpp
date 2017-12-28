@@ -7,8 +7,9 @@ instance variables
 -- TODO Define instance variables here
 	act : Activity := new Activity("test");
 	s : Service := new Service(act);
-	--c1 : Celebrity :=  new Celebrity("Test Celebrity 1", act, 5, 35);
-	--c2 : Celebrity :=  new Celebrity("Test Celebrity 2", act, 4, 27);
+	c1 : Celebrity :=  new Celebrity("Test Celebrity 1", 35);
+	c2 : Celebrity :=  new Celebrity("Test Celebrity 2", 27);
+
 operations
 -- TODO Define operations here
 	private assertTrue: bool ==> ()
@@ -17,15 +18,17 @@ operations
 
 	private testAddRemoveCelebrity: () ==> ()
 	testAddRemoveCelebrity() == (
+		c1.addActivity(act);
+	 	c2.addActivity(act);
 		IO`print("* Test adding and removing celebrities from a service *\n");
 		IO`print("\nAdding 2 celebrities to the service...\n");
-		--s.addCelebrity(c1);
-		--s.addCelebrity(c2);
-		--assertTrue(s.getCelebrities() = [c1, c2]);
+		s.addCelebrity(c1);
+		s.addCelebrity(c2);
+		assertTrue(s.getCelebrities() = [c1, c2]);
 		IO`print("Current celebrities: "); IO`print(s.getCelebrities()(1)); IO`print(s.getCelebrities()(2)); IO`print("\n");
 		IO`print("Removing the first celebrity...\n");
-		--s.removeCelebrity(c1);
-		--assertTrue(s.getCelebrities() = [c2]);
+		s.removeCelebrity(c1);
+		assertTrue(s.getCelebrities() = [c2]);
 		IO`print("Current celebrities: "); IO`print(s.getCelebrities()(1)); IO`print("\n");
 	);
 	

@@ -8,6 +8,7 @@ instance variables
 	at1 : AgencyTest := new AgencyTest();
 	ct1 : CelebrityTest := new CelebrityTest();
 	st1 : ServiceTest := new ServiceTest();
+	pt1 : PlatformTest := new PlatformTest();
 	
 operations
 -- TODO Define operations here
@@ -20,6 +21,8 @@ operations
 		ct1.runTests();
 		IO`print("\n\n");
 		st1.runTests();
+		IO`print("\n\n");
+		pt1.runTests();
 		IO`print("\n\n");
 		IO`print("***** Finished running the tests *****\n")
 	);

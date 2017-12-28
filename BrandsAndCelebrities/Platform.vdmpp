@@ -22,7 +22,7 @@ operations
 		dcl celebs: seq of Celebrity := [];
 		for i = 1 to len celebrities do (
 			for j = 1 to len celebrities(i).getActivities() do (
-			if celebrities(i).getActivities()(i).name = act.name
+			if celebrities(i).getActivities()(j).name = act.name
 				then celebs := celebs ^ [celebrities(i)] ;
 		);
 		);
@@ -56,6 +56,9 @@ operations
 	
 	public getCelebrities : () ==> seq of Celebrity
 	getCelebrities() == return celebrities;
+	
+	public getAgencies : () ==> seq of Agency
+	getAgencies() == return agencies;
 	
 functions
 -- TODO Define functiones here
