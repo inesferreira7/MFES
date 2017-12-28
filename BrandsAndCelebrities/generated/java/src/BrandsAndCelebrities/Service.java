@@ -37,9 +37,9 @@ public class Service {
 
     Number i = 0L;
     VDMSeq new_celebs = SeqUtil.seq();
-    long toVar_4 = celebs.size();
+    long toVar_13 = celebs.size();
 
-    for (Long i_1 = 1L; i_1 <= toVar_4; i_1++) {
+    for (Long i_1 = 1L; i_1 <= toVar_13; i_1++) {
       if (!(Utils.equals(((Celebrity) Utils.get(celebs, i_1)), c))) {
         new_celebs =
             SeqUtil.conc(Utils.copy(new_celebs), SeqUtil.seq(((Celebrity) Utils.get(celebs, i_1))));

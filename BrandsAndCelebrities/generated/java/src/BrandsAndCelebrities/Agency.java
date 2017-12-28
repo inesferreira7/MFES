@@ -57,14 +57,29 @@ public class Agency {
     }
   }
 
-  public void fireCelebrity(final Celebrity cel) {
+  public void fireCelebrity(final Service serv, final Celebrity cel) {
 
     Number i = 0L;
     long toVar_2 = services.size();
 
     for (Long i_1 = 1L; i_1 <= toVar_2; i_1++) {
-      ((Service) Utils.get(services, i_1)).removeCelebrity(cel);
+      if (Utils.equals(((Service) Utils.get(services, i_1)), serv)) {
+        ((Service) Utils.get(services, i_1)).removeCelebrity(cel);
+      }
     }
+  }
+
+  public VDMSeq findServiceByCelebrity(final Celebrity c) {
+
+    VDMSeq ret = SeqUtil.seq();
+    long toVar_3 = services.size();
+
+    for (Long i = 1L; i <= toVar_3; i++) {
+      if (SetUtil.inSet(c, SeqUtil.elems(((Service) Utils.get(services, i)).getCelebrities()))) {
+        ret = SeqUtil.conc(Utils.copy(ret), SeqUtil.seq(((Service) Utils.get(services, i))));
+      }
+    }
+    return Utils.copy(ret);
   }
 
   public Agency() {}

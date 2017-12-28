@@ -60,7 +60,6 @@ public class AgencyTest {
         ((Celebrity) Utils.get(((Service) Utils.get(a.getServices(), 1L)).getCelebrities(), 1L)));
     IO.print("\n");
     IO.print("Firing the previous celebrity from the service...\n");
-    a.fireCelebrity(c);
     assertTrue(Utils.empty(((Service) Utils.get(a.getServices(), 1L)).getCelebrities()));
     IO.print("Celebrities hired to that service: ");
     IO.print(((Service) Utils.get(a.getServices(), 1L)).getCelebrities().size());

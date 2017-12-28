@@ -42,6 +42,20 @@ public class Celebrity {
     activities = SeqUtil.conc(Utils.copy(activities), SeqUtil.seq(a));
   }
 
+  public void removeActivity(final Activity a) {
+
+    VDMSeq new_act = SeqUtil.seq();
+    long toVar_4 = activities.size();
+
+    for (Long i = 1L; i <= toVar_4; i++) {
+      if (!(Utils.equals(((Activity) Utils.get(activities, i)), a))) {
+        new_act =
+            SeqUtil.conc(Utils.copy(new_act), SeqUtil.seq(((Activity) Utils.get(activities, i))));
+      }
+    }
+    activities = Utils.copy(new_act);
+  }
+
   public Celebrity() {}
 
   public String toString() {
