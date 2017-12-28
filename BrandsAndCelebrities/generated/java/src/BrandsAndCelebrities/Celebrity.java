@@ -56,6 +56,18 @@ public class Celebrity {
     activities = Utils.copy(new_act);
   }
 
+  public Boolean hasActivity(final String a) {
+
+    long toVar_5 = activities.size();
+
+    for (Long i = 1L; i <= toVar_5; i++) {
+      if (Utils.equals(((Activity) Utils.get(activities, i)).name, a)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public Celebrity() {}
 
   public String toString() {

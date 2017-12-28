@@ -244,7 +244,7 @@ public class Graphics {
 	    }
 	    else if (choice == 3) {
 	    	clearScreen();
-	    	//TODO add activity
+	    	menuAddCelebrityActivities(cel);
 	    }
 	    else if (choice == 4) {
 	    	clearScreen();
@@ -488,9 +488,10 @@ public class Graphics {
 	    		Service s = (Service) iter2.next();
 	    		System.out.println("                   -> " + s.getActivity().name);
 	    	}
-	    	System.out.println();
-	    	System.out.println("                   0 - Back");
 	    }
+	    
+	    System.out.println();
+    	System.out.println("                   0 - Back");
 	    
 	    int choice = getIntChoice();
 	    
@@ -544,7 +545,7 @@ public class Graphics {
   
   public static void menuRemoveCelebrityActivities(Celebrity cel) {
 	    System.out.println("**************************************************"); 
-	    System.out.println("                " + cel.name + " - Activities");
+	    System.out.println("           " + cel.name + " - Remove Activities");
 	    System.out.println("**************************************************");
 	    System.out.println();
 
@@ -553,12 +554,12 @@ public class Graphics {
 	    
 	    while(it.hasNext()) {
 	    	Activity a = (Activity) it.next();
-	    	System.out.println("      " + i + " - " + a.name);
+	    	System.out.println("              " + i + " - " + a.name);
 	    	i++;
 	    }
 	    
 	    System.out.println();
-	    System.out.println("      0 - Back");
+	    System.out.println("              0 - Back");
 	    
 	    int choice = getIntChoice();
 	    
@@ -570,6 +571,45 @@ public class Graphics {
 	    	clearScreen();
 	    	Activity act = (Activity) cel.getActivities().get(choice-1);
 	    	platform.removeActivityFromCelebrity(cel, act);
+	    	menuRegisteredCelebrity(cel);
+	    }
+	    else {
+	        clearScreen(); 
+	        System.out.println("Please enter a valid option");
+	        menuRemoveCelebrityActivities(cel);
+	    }
+}
+  
+  public static void menuAddCelebrityActivities(Celebrity cel) {
+	    System.out.println("**************************************************"); 
+	    System.out.println("            " + cel.name + " - Add Activities");
+	    System.out.println("**************************************************");
+	    System.out.println();
+
+	    Iterator it = platform.Activity.iterator();
+	    int i = 1;
+	    
+	    while(it.hasNext()) {
+	    	String s = getActivityString(it.next());
+	    	if(!cel.hasActivity(s)){
+		    	System.out.println("              " + i + " - " + s);
+	    	}
+	    	i++;
+	    }
+	    
+	    System.out.println();
+	    System.out.println("              0 - Back");
+	    
+	    int choice = getIntChoice();
+	    
+	    if(choice == 0) {
+	    	clearScreen();
+	    	menuRegisteredCelebrity(cel);
+	    }
+	    else if (choice != 0 && choice <= platform.Activity.size()) {
+	    	clearScreen();
+	    	Activity act = getActivity(choice);
+	    	cel.addActivity(act);
 	    	menuRegisteredCelebrity(cel);
 	    }
 	    else {

@@ -28,12 +28,12 @@ public class Platform {
     Number i = 0L;
     Number j = 0L;
     VDMSeq celebs = SeqUtil.seq();
-    long toVar_6 = celebrities.size();
+    long toVar_7 = celebrities.size();
 
-    for (Long i_2 = 1L; i_2 <= toVar_6; i_2++) {
-      long toVar_5 = ((Celebrity) Utils.get(celebrities, i_2)).getActivities().size();
+    for (Long i_2 = 1L; i_2 <= toVar_7; i_2++) {
+      long toVar_6 = ((Celebrity) Utils.get(celebrities, i_2)).getActivities().size();
 
-      for (Long j_1 = 1L; j_1 <= toVar_5; j_1++) {
+      for (Long j_1 = 1L; j_1 <= toVar_6; j_1++) {
         if (Utils.equals(
             ((Activity) Utils.get(((Celebrity) Utils.get(celebrities, i_2)).getActivities(), i_2))
                 .name,
@@ -51,9 +51,9 @@ public class Platform {
 
     Agency a = null;
     Number i = 0L;
-    long toVar_7 = agencies.size();
+    long toVar_8 = agencies.size();
 
-    for (Long i_2 = 1L; i_2 <= toVar_7; i_2++) {
+    for (Long i_2 = 1L; i_2 <= toVar_8; i_2++) {
       if (Utils.equals(((Agency) Utils.get(agencies, i_2)).name, name)) {
         return ((Agency) Utils.get(agencies, i_2));
       }
@@ -64,9 +64,9 @@ public class Platform {
   public Celebrity getCelebrityByName(final String name) {
 
     Celebrity cel = null;
-    long toVar_8 = celebrities.size();
+    long toVar_9 = celebrities.size();
 
-    for (Long i = 1L; i <= toVar_8; i++) {
+    for (Long i = 1L; i <= toVar_9; i++) {
       if (Utils.equals(((Celebrity) Utils.get(celebrities, i)).name, name)) {
         return ((Celebrity) Utils.get(celebrities, i));
       }
@@ -92,12 +92,12 @@ public class Platform {
   public VDMSeq getCelebrityContracts(final Celebrity c) {
 
     VDMSeq ret = SeqUtil.seq();
-    long toVar_10 = agencies.size();
+    long toVar_11 = agencies.size();
 
-    for (Long i = 1L; i <= toVar_10; i++) {
-      long toVar_9 = ((Agency) Utils.get(agencies, i)).getServices().size();
+    for (Long i = 1L; i <= toVar_11; i++) {
+      long toVar_10 = ((Agency) Utils.get(agencies, i)).getServices().size();
 
-      for (Long j = 1L; j <= toVar_9; j++) {
+      for (Long j = 1L; j <= toVar_10; j++) {
         if (SetUtil.inSet(
             c,
             SeqUtil.elems(
@@ -113,12 +113,12 @@ public class Platform {
   public void removeActivityFromCelebrity(final Celebrity c, final Activity act) {
 
     c.removeActivity(act);
-    long toVar_12 = agencies.size();
+    long toVar_13 = agencies.size();
 
-    for (Long i = 1L; i <= toVar_12; i++) {
-      long toVar_11 = ((Agency) Utils.get(agencies, i)).getServices().size();
+    for (Long i = 1L; i <= toVar_13; i++) {
+      long toVar_12 = ((Agency) Utils.get(agencies, i)).getServices().size();
 
-      for (Long j = 1L; j <= toVar_11; j++) {
+      for (Long j = 1L; j <= toVar_12; j++) {
         if (SetUtil.inSet(
             c,
             SeqUtil.elems(

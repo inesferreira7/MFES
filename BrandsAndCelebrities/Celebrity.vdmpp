@@ -46,6 +46,15 @@ operations
 			then new_act := new_act ^ [activities(i)]
 		);
 		activities := new_act;
+	);
+	
+	public hasActivity : seq1 of char ==> bool
+	hasActivity(a) == (
+		for i = 1 to len activities do (
+			if activities(i).name = a
+			then return true;
+		);
+		return false;
 	)
 
 	
