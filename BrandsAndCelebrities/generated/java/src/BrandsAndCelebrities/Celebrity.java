@@ -45,9 +45,9 @@ public class Celebrity {
   public void removeActivity(final Activity a) {
 
     VDMSeq new_act = SeqUtil.seq();
-    long toVar_4 = activities.size();
+    long toVar_6 = activities.size();
 
-    for (Long i = 1L; i <= toVar_4; i++) {
+    for (Long i = 1L; i <= toVar_6; i++) {
       if (!(Utils.equals(((Activity) Utils.get(activities, i)), a))) {
         new_act =
             SeqUtil.conc(Utils.copy(new_act), SeqUtil.seq(((Activity) Utils.get(activities, i))));
@@ -58,9 +58,9 @@ public class Celebrity {
 
   public Boolean hasActivity(final String a) {
 
-    long toVar_5 = activities.size();
+    long toVar_7 = activities.size();
 
-    for (Long i = 1L; i <= toVar_5; i++) {
+    for (Long i = 1L; i <= toVar_7; i++) {
       if (Utils.equals(((Activity) Utils.get(activities, i)).name, a)) {
         return true;
       }
@@ -69,6 +69,19 @@ public class Celebrity {
   }
 
   public Celebrity() {}
+
+  public static Boolean validRating(final Number r) {
+
+    Boolean andResult_14 = false;
+
+    if (r.longValue() > 0L) {
+      if (r.longValue() < 6L) {
+        andResult_14 = true;
+      }
+    }
+
+    return andResult_14;
+  }
 
   public String toString() {
 

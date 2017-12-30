@@ -40,7 +40,15 @@ operations
 		celebs := new_celebs;
 	)
 	pre c in set elems celebs
-	post c not in set elems celebs and len celebs = len celebs~ - 1
+	post c not in set elems celebs and len celebs = len celebs~ - 1;
+	
+	public hasActivity : seq1 of char ==> bool
+	hasActivity(name) == (
+		if activity.name = name
+		then return true;
+		
+		return false;
+	)
 	
 functions
 -- TODO Define functiones here

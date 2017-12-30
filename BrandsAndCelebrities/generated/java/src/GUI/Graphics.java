@@ -100,7 +100,7 @@ public class Graphics {
       menuDivide(); 
     } 
     else if(choice == 3){ 
-      menuListActivities(choice, null); 
+      menuListActivities(null); 
     } 
     else if(choice == 4) { 
       try { 
@@ -124,8 +124,8 @@ public class Graphics {
 	System.out.println("**************************************************"); 
 	System.out.println("**************************************************"); 
 	System.out.println("*                                                *"); 
-	System.out.println("*        1 - I don't have an account             *"); 
-	System.out.println("*        2 - I already have an account           *");
+	System.out.println("*        1 - Register a new celebrity            *"); 
+	System.out.println("*        2 - Find a registered celebrity         *");
 	System.out.println("*                                                *");
 	System.out.println("*        0 - Back                                *"); 
 	System.out.println("*                                                *"); 
@@ -139,6 +139,7 @@ public class Graphics {
       } 
       else if(choice == 2){ 
         clearScreen();
+        menuCelebrityChoiceOption();
 	    System.out.println("*             Insert celebrity name :               *"); 
 	    String name = getStringChoice(); 
 	    Celebrity cel = platform.getCelebrityByName(name);
@@ -154,6 +155,142 @@ public class Graphics {
         menuCelebrity(); 
       } 
   }
+  
+  private static void menuCelebrityChoiceOption() {
+		System.out.println("**************************************************"); 
+		System.out.println("**********          Celebrity           **********"); 
+		System.out.println("**************************************************"); 
+		System.out.println("**************************************************"); 
+		System.out.println("*                                                *"); 
+		System.out.println("*        1 - Find by celebrity name              *"); 
+		System.out.println("*        2 - List all celebrities                *");
+		System.out.println("*                                                *");
+		System.out.println("*        0 - Back                                *"); 
+		System.out.println("*                                                *"); 
+		System.out.println("**************************************************");
+		
+		int choice = getIntChoice(); 
+		
+	    if(choice == 1){ 
+	        clearScreen();
+	        menuCelebrityChoiceOption();
+		    System.out.println("*             Insert celebrity name :               *"); 
+		    String name = getStringChoice(); 
+		    Celebrity cel = platform.getCelebrityByName(name);
+	        menuRegisteredCelebrity(cel); 
+	      } 
+	      else if(choice == 2){
+	    	clearScreen();
+	    	menuListCelebrities();
+	      }   
+	      else if(choice == 0){ 
+	        clearScreen(); 
+	        menuCelebrity(); 
+	      } 
+	      else{ 
+	        clearScreen(); 
+	        System.out.println("Please enter a valid option."); 
+	        menuCelebrityChoiceOption();
+	      } 
+  }
+  
+  private static void menuAgencyChoiceOption() {
+		System.out.println("**************************************************"); 
+		System.out.println("**********           Agency             **********"); 
+		System.out.println("**************************************************"); 
+		System.out.println("**************************************************"); 
+		System.out.println("*                                                *"); 
+		System.out.println("*        1 - Find by agency name                 *"); 
+		System.out.println("*        2 - List all agencies                   *");
+		System.out.println("*                                                *");
+		System.out.println("*        0 - Back                                *"); 
+		System.out.println("*                                                *"); 
+		System.out.println("**************************************************");
+		
+		int choice = getIntChoice(); 
+		
+	    if(choice == 1){ 
+	        clearScreen();
+	        System.out.println("*             Insert agency name :               *"); 
+	        String name = getStringChoice(); 
+	        Agency ag = platform.getAgencyByName(name);
+	        clearScreen();
+	        menuAccount(ag);
+	      } 
+	      else if(choice == 2){
+	    	clearScreen();
+	    	menuListAgencies();
+	      }   
+	      else if(choice == 0){ 
+	        clearScreen(); 
+	        menuCelebrity(); 
+	      } 
+	      else{ 
+	        clearScreen(); 
+	        System.out.println("Please enter a valid option."); 
+	        menuCelebrityChoiceOption();
+	      } 
+  }
+  
+  private static void menuListCelebrities() {
+		System.out.println("**************************************************"); 
+		System.out.println("**********          Celebrites          **********"); 
+		System.out.println("**************************************************"); 
+		System.out.println("**************************************************"); 
+		System.out.println("*                                                *"); 
+		listAllCelebrities();
+		System.out.println("*                                                *");
+		System.out.println("*        0 - Back                                *"); 
+		System.out.println("*                                                *"); 
+		System.out.println("**************************************************");
+		
+		int choice = getIntChoice();
+		
+	    if(choice == 0){ 
+	        clearScreen(); 
+	        menuCelebrityChoiceOption();
+	      } 
+	      else if(choice > 0 && choice <= platform.getCelebrities().size()){ 
+	        clearScreen();
+	        Celebrity cel = (Celebrity) platform.getCelebrities().get(choice - 1);
+	        menuRegisteredCelebrity(cel);     
+	      }
+	      else{ 
+	        clearScreen(); 
+	        System.out.println("Please enter a valid option."); 
+	        menuListCelebrities(); 
+	      } 
+  }
+  
+  private static void menuListAgencies() {
+		System.out.println("**************************************************"); 
+		System.out.println("**********           Agencies           **********"); 
+		System.out.println("**************************************************"); 
+		System.out.println("**************************************************"); 
+		System.out.println("*                                                *"); 
+		listAllAgencies();
+		System.out.println("*                                                *");
+		System.out.println("*        0 - Back                                *"); 
+		System.out.println("*                                                *"); 
+		System.out.println("**************************************************");
+		
+		int choice = getIntChoice();
+		
+	    if(choice == 0){ 
+	        clearScreen(); 
+	        menuAgencyChoiceOption();
+	      } 
+	      else if(choice > 0 && choice <= platform.getAgencies().size()){ 
+	        clearScreen();
+	        Agency ag = (Agency) platform.getAgencies().get(choice - 1);
+	        menuAccount(ag);     
+	      }
+	      else{ 
+	        clearScreen(); 
+	        System.out.println("Please enter a valid option."); 
+	        menuListCelebrities(); 
+	      } 
+  }
    
   private static void menuDivide(){ 
      
@@ -162,8 +299,8 @@ public class Graphics {
     System.out.println("**************************************************"); 
     System.out.println("**************************************************"); 
     System.out.println("*                                                *"); 
-    System.out.println("*        1 - I don't have an account             *"); 
-    System.out.println("*        2 - I already have an account           *");
+    System.out.println("*        1 - Register a new agency               *"); 
+    System.out.println("*        2 - Find a registered agency            *");
     System.out.println("*                                                *");
     System.out.println("*        0 - Back                                *"); 
     System.out.println("*                                                *"); 
@@ -177,7 +314,7 @@ public class Graphics {
     } 
     else if(choice == 2){ 
       clearScreen(); 
-      menuAccount(choice);     
+      menuAgencyChoiceOption();     
     }   
     else if(choice == 0){ 
       clearScreen(); 
@@ -205,7 +342,7 @@ public class Graphics {
      
     if(choice == 1){ 
       clearScreen(); 
-      menuListActivities(account, null); 
+      menuListActivities(null); 
     }
     else if(choice == 0){ 
       clearScreen(); 
@@ -262,15 +399,12 @@ public class Graphics {
   }
   
    
-  private static void menuAccount(int account){ 
-     
-    System.out.println("*             Insert agency name :               *"); 
-    String name = getStringChoice(); 
-    Agency ag = platform.getAgencyByName(name); 
-     
+  private static void menuAccount(Agency ag){   
     System.out.println("**************************************************"); 
-    System.out.println("                Agency - " + name ); 
-    System.out.println("**************************************************"); 
+    System.out.println("                Agency - " + ag.name ); 
+    System.out.println("**************************************************");
+    System.out.println("*                                                *");
+    System.out.println("        Funds: " + ag.getFunds() + "€");
     System.out.println("*                                                *"); 
     System.out.println("*       1 - Consult services available           *"); 
     System.out.println("*       2 - List all my contracts                *");
@@ -283,11 +417,11 @@ public class Graphics {
      
     if(choice ==1){ 
       clearScreen(); 
-      menuListActivities(account, ag); 
+      menuListActivities(ag); 
     } 
     else if(choice == 2){ 
       clearScreen(); 
-      menuListContracts(ag, account); 
+      menuListContracts(ag); 
     } 
     else if(choice == 0){ 
       clearScreen(); 
@@ -296,11 +430,11 @@ public class Graphics {
     else{
       clearScreen(); 
       System.out.println("Please enter a valid option"); 
-      menuAccount(account); 
+      menuAccount(ag); 
     }
   } 
    
-  public static void menuListContracts(Agency ag, int account){ 
+  public static void menuListContracts(Agency ag){ 
      
     System.out.println("**************************************************"); 
     System.out.println("                Agency - " + ag.name ); 
@@ -311,31 +445,102 @@ public class Graphics {
     int i=1; 
     while(it.hasNext()){ 
       Service s = (Service) it.next(); 
-      System.out.print(i + " - Service: " + s.getActivity().name + "   Celebrities: "); 
-      Iterator iter = s.getCelebrities().iterator(); 
-      int j=1; 
-      while(iter.hasNext()){ 
-        Celebrity c = (Celebrity) iter.next(); 
-        System.out.print(c.name + "   "); 
-        j++; 
-      } 
-      i++; 
+      System.out.println("       " + i + " - Service: " + s.getActivity().name);
+      i++;
     }
+    
     System.out.println();
-    System.out.println("                  0 - Back");
+    System.out.println("       0 - Back");
     System.out.println();
     
     int choice = getIntChoice();
+    
     if(choice == 0){
     	clearScreen();
-    	menuAccount(account);
+    	menuAccount(ag);
     }
-    else{
+    else if (choice > 0 && choice <= ag.getServices().size()) {
         clearScreen(); 
-        System.out.println("Please enter a valid option"); 
-        menuListContracts(ag, account); 
+        Service s1 = (Service) ag.getServices().get(choice - 1);
+        menuServiceDetails(ag, s1);
     }
-  } 
+    else {
+    	clearScreen();
+    	System.out.println("Please enter a valid option");
+    	menuListContracts(ag);
+    }
+  }
+    
+  private static void menuServiceDetails(Agency ag, Service s) {
+	    System.out.println("**************************************************"); 
+	    System.out.println("                Agency - " + ag.name );
+	    System.out.println("**************************************************");
+	    System.out.println("                   Service Details");
+	    System.out.println();
+	    System.out.println("         Service Name: " + s.getActivity().name);
+	    System.out.println();
+	    System.out.println("         Celebrities Assigned:");
+	    
+	    Iterator it = s.getCelebrities().iterator();
+	    int i = 1;
+	    
+	    while(it.hasNext()){
+	    	Celebrity cel = (Celebrity) it.next();
+	    	System.out.println("                   " + i + " - " + cel.name);
+	    	i++;
+	    }
+	    System.out.println();
+	    System.out.println("         0 - Back      " + i + " - Add celebrities");
+	    int choice = getIntChoice();
+	    
+	    if (choice == 0) {
+	    	clearScreen();
+	    	menuListContracts(ag);
+	    }
+	    else if (choice > 0 && choice <= s.getCelebrities().size()) {
+	    	clearScreen();
+	    	menuCelebrityInfo((Celebrity) s.getCelebrities().get(choice - 1), ag, s);
+	    }
+	    else if (choice == s.getCelebrities().size() + 1) {
+	    	clearScreen();
+	    	Activity a = s.getActivity();
+	    	menuListAgencyCelebrities(a, ag);
+	    }
+	    else {
+	    	clearScreen();
+	    	System.out.println("Please enter a valid option");
+	    	menuServiceDetails(ag, s);
+	    }
+  }
+  
+  private static void menuCelebrityInfo(Celebrity c, Agency ag, Service s) {
+	    System.out.println("**************************************************");
+	    System.out.println("                Celebrity Info");
+	    System.out.println("**************************************************");
+	    System.out.println();
+	    System.out.println("         Name: " + c.name);
+	    System.out.println("         Rsting: " + c.getRating());
+	    System.out.println("         Price: " + c.getPrice() + "€");
+	    System.out.println();
+	    System.out.println("      1 - Fire Celebrity          0 - Back");
+	    
+	    int choice = getIntChoice();
+	    
+	    if (choice == 0) {
+	    	clearScreen();
+	    	menuServiceDetails(ag, s);
+	    }
+	    else if (choice == 1) {
+	    	clearScreen();
+	    	ag.fireCelebrity(s, c);
+	    	menuAccount(ag);	    	
+	    }
+	    else {
+	    	clearScreen();
+	    	System.out.println("Please enter a valid option");
+	    	menuCelebrityInfo(c, ag, s);
+	    }
+  }
    
   private static void menuCelebrityRegister(){ 
     System.out.println("**************************************************"); 
@@ -348,6 +553,8 @@ public class Graphics {
     int price = getIntChoice();
     Celebrity c = new Celebrity(name, price); 
     platform.addCelebrity(c);
+    
+    menuCelebrityChoiceOption();
   } 
    
   private static void menuAgencyRegister(Activity a, Celebrity c){ 
@@ -370,22 +577,25 @@ public class Graphics {
   } 
    
   public static void contract(Agency ag, Celebrity c, Activity a){ 
-    Service s = new Service(a); 
-    ag.addService(s); 
+    Service s = new Service(a);
+    if (!ag.hasService(s.getActivity().name))
+    	ag.addService(s);
+    
     ag.hireCelebrity(s, c);     
     clearScreen(); 
     System.out.println("Contract finalized with " + c.name); 
-    System.out.println(); 
-    menuChooseUser(); 
+    System.out.println();
+    System.out.println();
+    menuAccount(ag); 
   } 
    
-  private static void menuListActivities(int account, Agency ag){ 
+  private static void menuListActivities(Agency ag){ 
      
     System.out.println("**************************************************"); 
     System.out.println("**********           Services           **********"); 
     System.out.println("**************************************************"); 
     System.out.println("                                                  "); 
-    listActivities(); 
+    listActivities(ag); 
     System.out.println("                                                  ");
     System.out.println("                  0 - Back");
     System.out.println("**************************************************"); 
@@ -394,8 +604,9 @@ public class Graphics {
      
     int service = getIntChoice();
     if(service <= platform.Activity.size() && service != 0){
+    	clearScreen();
     	Activity a = getActivity(service);
-    	menuListCelebrities(a, account, ag);
+    	menuListAgencyCelebrities(a, ag);
     }
     else if(service == 0){
     	clearScreen();
@@ -404,29 +615,33 @@ public class Graphics {
     else{
         clearScreen(); 
         System.out.println("Please enter a valid option");
-        menuListActivities(account, ag);
+        menuListActivities(ag);
     }
   } 
    
-  public static void menuListCelebrities(Activity a, int account, Agency ag){ 
-     
+  public static void menuListAgencyCelebrities(Activity a, Agency ag){ 
+     int account = 1; //TEMPORARIO!!!!
     System.out.println("**************************************************"); 
     System.out.println("**********          Celebrities         **********"); 
     System.out.println(); 
-    Celebrity c = listCelebrities(a); 
-    System.out.println(); 
-    if(account == 1){ 
+    listCelebrities(a, ag); 
+    System.out.println();
+    
+    int choice = getIntChoice();
+    
+    if(choice == 0){ 
       clearScreen(); 
-      System.out.println("You've chosen " + c.name + ". To complete the contract, you have to register."); 
-      menuAgencyRegister(a, c); 
+      //System.out.println("You've chosen " + c.name + ". To complete the contract, you have to register."); 
+      menuAccount(ag); 
     } 
-    else if(account == 2){ 
-      contract(ag,c,a); 
+    else if(choice > 0 && choice <= platform.getCelebsWithActivity(a).size()){
+      Celebrity cel = (Celebrity) platform.getCelebsWithActivity(a).get(choice - 1);
+      contract(ag,cel,a); 
     } 
-    else if(account == 3){ 
-      System.out.println("Enter platform as an agency to make a contract!"); 
-      System.out.println(); 
-      menuChooseUser(); 
+    else { 
+        clearScreen(); 
+        System.out.println("Please enter a valid option");
+        menuListAgencyCelebrities(a, ag);
     } 
   } 
    
@@ -461,15 +676,38 @@ public class Graphics {
     else return "erro";   
   } 
    
-  public static void listActivities(){ 
+  public static void listActivities(Agency ag){ 
      
     Iterator iter = Platform.Activity.iterator(); 
     int i=1; 
-    while (iter.hasNext()) { 
-        System.out.println("                  " + i + " - " + getActivityString(iter.next())); 
+    while (iter.hasNext()) {
+    	String s = getActivityString(iter.next());
+    	if(!ag.hasService(s))
+    		System.out.println("                  " + i + " - " + s); 
         i++; 
     } 
-  } 
+  }
+  
+  private static void listAllCelebrities() {
+	  Iterator it = platform.getCelebrities().iterator();
+	  int i = 1;
+	  
+	  while(it.hasNext()){
+		  Celebrity cel = (Celebrity) it.next();
+		  System.out.println("         " + i + " - " + cel.name);
+		  i++;
+	  }
+  }
+  
+  private static void listAllAgencies() {
+	  Iterator it = platform.getAgencies().iterator();
+	  int i = 1;
+	  while(it.hasNext()){
+		  Agency ag = (Agency) it.next();
+		  System.out.println("         " + i + " - " + ag.name);
+		  i++;
+	  }
+  }
  
   public static void menuListCelebrityContracts(Celebrity cel) {
 	    System.out.println("**************************************************"); 
@@ -619,33 +857,22 @@ public class Graphics {
 	    }
 }
   
-  public static Celebrity listCelebrities(Activity act){ 
+  public static void listCelebrities(Activity act, Agency ag){ 
      
     Iterator iter = platform.getCelebsWithActivity(act).iterator(); 
     int i=1; 
      
     while (iter.hasNext()) { 
-      Celebrity c = (Celebrity) iter.next(); 
-        System.out.println(i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice()); 
+      Celebrity c = (Celebrity) iter.next();
+      	if(!ag.hasServiceWithCelebrity(act.name, c)){
+            System.out.println("   " + i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice() + "€"); 
+      	}
         i++; 
     } 
-    System.out.println("                                                  "); 
+    System.out.println();
+    System.out.println("   0 - Back");
+    System.out.println();
     System.out.println("**************************************************"); 
-    System.out.println("                                                  "); 
-     
-    int choice = getIntChoice(); 
-     
-    int j = 1; 
-     
-    iter = platform.getCelebsWithActivity(act).iterator(); 
-    while(iter.hasNext()){ 
-      Celebrity c = (Celebrity) iter.next(); 
-      if(j == choice){ 
-        return c; 
-      } 
-      j++; 
-    } 
-    return null; 
   } 
    
   public static Activity getActivity(int choice){ 

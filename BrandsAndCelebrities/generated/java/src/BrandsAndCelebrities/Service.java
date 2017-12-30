@@ -37,15 +37,24 @@ public class Service {
 
     Number i = 0L;
     VDMSeq new_celebs = SeqUtil.seq();
-    long toVar_14 = celebs.size();
+    long toVar_16 = celebs.size();
 
-    for (Long i_1 = 1L; i_1 <= toVar_14; i_1++) {
+    for (Long i_1 = 1L; i_1 <= toVar_16; i_1++) {
       if (!(Utils.equals(((Celebrity) Utils.get(celebs, i_1)), c))) {
         new_celebs =
             SeqUtil.conc(Utils.copy(new_celebs), SeqUtil.seq(((Celebrity) Utils.get(celebs, i_1))));
       }
     }
     celebs = Utils.copy(new_celebs);
+  }
+
+  public Boolean hasActivity(final String name) {
+
+    if (Utils.equals(activity.name, name)) {
+      return true;
+    }
+
+    return false;
   }
 
   public Service() {}

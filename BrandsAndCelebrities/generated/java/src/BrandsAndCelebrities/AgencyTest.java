@@ -7,8 +7,10 @@ import org.overture.codegen.runtime.*;
 public class AgencyTest {
   private Agency a = new Agency("test");
   private Activity act = new Activity("test");
+  private Activity act2 = new Activity("test2");
   private Celebrity c = new Celebrity("Test Celebrity", 35L);
   private Service s = new Service(act);
+  private Service s2 = new Service(act2);
 
   private void assertTrue(final Boolean cond) {
 
@@ -41,6 +43,7 @@ public class AgencyTest {
     IO.print("\nAdding 100€ to the funds...\n");
     a.addFunds(100L);
     IO.print("Adding a new service to the Agency...\n");
+    c.addActivity(act);
     assertTrue(Utils.empty(a.getServices()));
     a.addService(s);
     assertTrue(Utils.equals(a.getServices(), SeqUtil.seq(s)));
@@ -60,6 +63,7 @@ public class AgencyTest {
         ((Celebrity) Utils.get(((Service) Utils.get(a.getServices(), 1L)).getCelebrities(), 1L)));
     IO.print("\n");
     IO.print("Firing the previous celebrity from the service...\n");
+    a.fireCelebrity(s, c);
     assertTrue(Utils.empty(((Service) Utils.get(a.getServices(), 1L)).getCelebrities()));
     IO.print("Celebrities hired to that service: ");
     IO.print(((Service) Utils.get(a.getServices(), 1L)).getCelebrities().size());
@@ -73,12 +77,24 @@ public class AgencyTest {
     assertTrue(Utils.empty(a.getServices()));
   }
 
+  private void testServiceByCelebrity() {
+
+    c.addActivity(act);
+    c.addActivity(act2);
+    s.addCelebrity(c);
+    s2.addCelebrity(c);
+    a.addService(s);
+    a.addService(s2);
+    assertTrue(Utils.equals(a.findServiceByCelebrity(c), SeqUtil.seq(s, s2)));
+  }
+
   public static void runTests() {
 
     IO.print("*** Running Agency tests ***\n");
     new AgencyTest().testAddRemoveFunds();
     new AgencyTest().testHireFireCelebritytoService();
     new AgencyTest().testGets();
+    new AgencyTest().testServiceByCelebrity();
   }
 
   public AgencyTest() {}
@@ -90,10 +106,14 @@ public class AgencyTest {
         + Utils.toString(a)
         + ", act := "
         + Utils.toString(act)
+        + ", act2 := "
+        + Utils.toString(act2)
         + ", c := "
         + Utils.toString(c)
         + ", s := "
         + Utils.toString(s)
+        + ", s2 := "
+        + Utils.toString(s2)
         + "}";
   }
 }

@@ -5,47 +5,51 @@ import org.overture.codegen.runtime.*;
 
 @SuppressWarnings("all")
 public class CelebrityTest {
-  private Activity old_act = new Activity("test");
-  private Activity new_act = new Activity("change_test");
+  private Activity act = new Activity("test");
+  private Celebrity c = new Celebrity("Test Celebrity", 35L);
 
   private void assertTrue(final Boolean cond) {
 
     return;
   }
 
-  private void testChangeActivity() {
+  private void testAddActivity() {
 
-    IO.print("\n* Test changing the activity of the celebrity *\n");
-    IO.print("\nCurrent Activity: ");
-    IO.print(old_act);
-    IO.print("\n");
-    IO.print("Changing activity...\n");
-    IO.print("Current Activity: ");
-    IO.print(new_act);
-    IO.print("\n");
+    IO.print("\nTesting add activity to celebrity...\n");
+    c.addActivity(act);
+    assertTrue(Utils.equals(c.getActivities(), SeqUtil.seq(act)));
+    assertTrue(Utils.equals(c.hasActivity("test"), true));
+    assertTrue(Utils.equals(c.hasActivity("test2"), false));
   }
 
   private void testGets() {
 
     IO.print("\nTesting get functions...\n");
+    assertTrue(Utils.empty(c.getActivities()));
+    Boolean andResult_21 = false;
+
+    if (c.getRating().longValue() > 0L) {
+      if (c.getRating().longValue() < 6L) {
+        andResult_21 = true;
+      }
+    }
+
+    assertTrue(andResult_21);
+
+    assertTrue(Utils.equals(c.getPrice(), 35L));
   }
 
   public static void runTests() {
 
     IO.print("*** Running Celebrity tests ***\n");
     new CelebrityTest().testGets();
-    new CelebrityTest().testChangeActivity();
+    new CelebrityTest().testAddActivity();
   }
 
   public CelebrityTest() {}
 
   public String toString() {
 
-    return "CelebrityTest{"
-        + "old_act := "
-        + Utils.toString(old_act)
-        + ", new_act := "
-        + Utils.toString(new_act)
-        + "}";
+    return "CelebrityTest{" + "act := " + Utils.toString(act) + ", c := " + Utils.toString(c) + "}";
   }
 }
