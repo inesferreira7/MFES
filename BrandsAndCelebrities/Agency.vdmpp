@@ -45,7 +45,6 @@ operations
 	
 	public hireCelebrity : Service * Celebrity ==> ()
 	hireCelebrity(serv, cel) == (
-		dcl i: int;
 		for i = 1 to len services do (
 			if services(i).getActivity().name = serv.getActivity().name
 			then (
@@ -59,7 +58,6 @@ operations
 	
 	public fireCelebrity : Service * Celebrity ==> ()
 	fireCelebrity(serv, cel) == (
-		dcl i: int;
 		dcl new_serv : seq of Service := [];
 		for i = 1 to len services do (
 		if services(i) = serv
@@ -84,9 +82,9 @@ operations
 	);
 	
 	public hasService : seq1 of char ==> bool
-	hasService(name) == (
+	hasService(nameS) == (
 		for i = 1 to len services do (
-			if services(i).hasActivity(name)
+			if services(i).hasActivity(nameS)
 			then return true;
 		);
 		return false;

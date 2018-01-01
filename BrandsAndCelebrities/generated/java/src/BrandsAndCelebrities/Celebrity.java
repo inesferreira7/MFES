@@ -2,9 +2,10 @@ package BrandsAndCelebrities;
 
 import java.util.*;
 import org.overture.codegen.runtime.*;
+import java.io.Serializable;
 
 @SuppressWarnings("all")
-public class Celebrity {
+public class Celebrity implements Serializable{
   public String name;
   private VDMSeq activities = SeqUtil.seq();
   private Number rating;

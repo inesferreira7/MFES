@@ -17,8 +17,6 @@ operations
 	
 	public getCelebsWithActivity : Activity ==> seq of Celebrity
 	getCelebsWithActivity(act) == (
-		dcl i: int;
-		dcl j: int;
 		dcl celebs: seq of Celebrity := [];
 		for i = 1 to len celebrities do (
 			for j = 1 to len celebrities(i).getActivities() do (
@@ -33,7 +31,6 @@ operations
 	public getAgencyByName : seq1 of char ==> Agency
 	getAgencyByName(name) == (
 		dcl a: Agency;
-		dcl i:int;		
 		for i = 1 to len agencies do (
 			if agencies(i).name = name
 			then return agencies(i);
@@ -91,7 +88,49 @@ operations
 				then agencies(i).fireCelebrity(agencies(i).getServices()(j), c)
 			)
 		)
-	)
+	);
+	
+	public celebrityExists : seq1 of char ==> bool
+	celebrityExists(name) == (
+		dcl aux : seq of seq1 of char := [];
+		
+		for i = 1 to len celebrities do
+			aux := aux ^ [celebrities(i).name];
+		
+		return name in set elems aux
+	);
+	
+	public agencyExists : seq1 of char ==> bool
+	agencyExists(name) == (
+		dcl aux : seq of seq1 of char := [];
+		
+		for i = 1 to len agencies do
+			aux := aux ^ [agencies(i).name];
+		
+		return name in set elems aux
+	);
+	
+	public getCelebritiesByPrice : int ==> seq of Celebrity
+	getCelebritiesByPrice(price) == (
+		dcl ret : seq of Celebrity := [];
+		for i = 1 to len celebrities do (
+			if celebrities(i).getPrice() <= price
+			then ret := ret ^ [celebrities(i)];
+		);
+		
+		return ret;
+	);
+	
+	public getCelebritiesByRating : int ==> seq of Celebrity
+	getCelebritiesByRating(rating) == (
+		dcl ret : seq of Celebrity := [];
+		for i = 1 to len celebrities do (
+			if celebrities(i).getRating() >= rating
+			then ret := ret ^ [celebrities(i)];
+		);
+		
+		return ret;
+	);
 	
 functions
 -- TODO Define functiones here

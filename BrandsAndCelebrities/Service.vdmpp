@@ -31,7 +31,6 @@ operations
 	
 	public removeCelebrity : Celebrity ==> ()
 	removeCelebrity(c) == (
-		dcl i: int;
 		dcl new_celebs: seq of Celebrity := [];
 		for i = 1 to len celebs do (
 			if celebs(i) <> c
