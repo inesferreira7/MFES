@@ -6,8 +6,9 @@ import org.overture.codegen.runtime.*;
 @SuppressWarnings("all")
 public class PlatformTest {
   private Platform p = new Platform();
-  private Celebrity c = new Celebrity("cel1", 80L);
-  private Celebrity c2 = new Celebrity("cel2", 90L);
+  private Setor s1 = new Setor("Techonology");
+  private Celebrity c = new Celebrity("cel1", 80L, SeqUtil.seq(s1));
+  private Celebrity c2 = new Celebrity("cel2", 90L, SeqUtil.seq(s1));
   private Agency a = new Agency("ag1");
   private Activity act = new Activity("Sponsor");
   private Activity act2 = new Activity("Entertainer");
@@ -109,6 +110,8 @@ public class PlatformTest {
     return "PlatformTest{"
         + "p := "
         + Utils.toString(p)
+        + ", s1 := "
+        + Utils.toString(s1)
         + ", c := "
         + Utils.toString(c)
         + ", c2 := "

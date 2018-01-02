@@ -11,16 +11,17 @@ public class Celebrity {
   private Number rating;
   private Number price;
 
-  public void cg_init_Celebrity_1(final String nm, final Number prc) {
+  public void cg_init_Celebrity_1(final String nm, final Number prc, final VDMSeq s) {
 
     name = nm;
     rating = MATH.rand(4L).longValue() + 1L;
     price = prc;
+    setors = Utils.copy(s);
   }
 
-  public Celebrity(final String nm, final Number prc) {
+  public Celebrity(final String nm, final Number prc, final VDMSeq s) {
 
-    cg_init_Celebrity_1(nm, prc);
+    cg_init_Celebrity_1(nm, prc, Utils.copy(s));
   }
 
   public VDMSeq getActivities() {

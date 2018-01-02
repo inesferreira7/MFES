@@ -8,8 +8,7 @@ instance variables
 	a : Agency := new Agency("test");
 	act : Activity := new Activity("test");
 	act2 : Activity := new Activity("test2");
-	s1: Setor := new Setor("Technology");
-	c : Celebrity :=  new Celebrity("Test Celebrity", 35, [s1]);
+	c : Celebrity :=  new Celebrity("Test Celebrity", 35);
 	s : Service := new Service(act);
 	s2: Service := new Service(act2);
 	

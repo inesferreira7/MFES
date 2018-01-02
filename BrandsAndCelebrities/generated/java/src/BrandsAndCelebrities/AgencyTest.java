@@ -8,7 +8,8 @@ public class AgencyTest {
   private Agency a = new Agency("test");
   private Activity act = new Activity("test");
   private Activity act2 = new Activity("test2");
-  private Celebrity c = new Celebrity("Test Celebrity", 35L);
+  private Setor s1 = new Setor("Technology");
+  private Celebrity c = new Celebrity("Test Celebrity", 35L, SeqUtil.seq(s1));
   private Service s = new Service(act);
   private Service s2 = new Service(act2);
 
@@ -107,6 +108,8 @@ public class AgencyTest {
         + Utils.toString(act)
         + ", act2 := "
         + Utils.toString(act2)
+        + ", s1 := "
+        + Utils.toString(s1)
         + ", c := "
         + Utils.toString(c)
         + ", s := "

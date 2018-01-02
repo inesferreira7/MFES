@@ -6,7 +6,8 @@ import org.overture.codegen.runtime.*;
 @SuppressWarnings("all")
 public class CelebrityTest {
   private Activity act = new Activity("test");
-  private Celebrity c = new Celebrity("Test Celebrity", 35L);
+  private Setor s = new Setor("Techonology");
+  private Celebrity c = new Celebrity("Test Celebrity", 35L, SeqUtil.seq(s));
 
   private void assertTrue(final Boolean cond) {
 
@@ -50,6 +51,13 @@ public class CelebrityTest {
 
   public String toString() {
 
-    return "CelebrityTest{" + "act := " + Utils.toString(act) + ", c := " + Utils.toString(c) + "}";
+    return "CelebrityTest{"
+        + "act := "
+        + Utils.toString(act)
+        + ", s := "
+        + Utils.toString(s)
+        + ", c := "
+        + Utils.toString(c)
+        + "}";
   }
 }

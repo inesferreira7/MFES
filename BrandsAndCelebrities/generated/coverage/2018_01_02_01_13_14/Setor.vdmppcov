@@ -1,0 +1,24 @@
+class Setor
+types
+
+	public String = seq1 of char;
+	
+values
+
+instance variables
+
+	public name: String;
+
+operations
+
+	public Setor: String ==> Setor
+	Setor(nm) == (
+	name := nm;
+	)
+	post name=nm;
+	
+functions
+
+traces
+
+end Setor

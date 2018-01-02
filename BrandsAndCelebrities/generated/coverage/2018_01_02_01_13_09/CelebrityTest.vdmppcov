@@ -6,8 +6,7 @@ values
 instance variables
 	
 	act : Activity := new Activity("test");
-	s : Setor := new Setor("Techonology");
-	c : Celebrity := new Celebrity("Test Celebrity", 35, [s]);
+	c : Celebrity := new Celebrity("Test Celebrity", 35);
 	
 operations
 	private assertTrue: bool ==> ()

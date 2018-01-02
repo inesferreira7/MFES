@@ -1,8 +1,10 @@
 package CLI;
 
 import java.io.*; 
-import java.util.Iterator; 
- 
+import java.util.Iterator;
+
+import org.overture.codegen.runtime.VDMSeq;
+
 import BrandsAndCelebrities.Activity; 
 import BrandsAndCelebrities.Agency; 
 import BrandsAndCelebrities.Celebrity; 
@@ -39,8 +41,9 @@ public class Interface {
        
       Activity a1 = new Activity("Ambassador"); 
       Setor se1 = new Setor("Technology");
-      Celebrity c1 = new Celebrity("ines",80); 
-      Celebrity c2 = new Celebrity("nuno",70);
+      VDMSeq setors = new VDMSeq(); setors.add(se1);
+      Celebrity c1 = new Celebrity("ines",80,setors); 
+      Celebrity c2 = new Celebrity("nuno",70,setors);
       c1.addActivity(a1);
       c1.addSetor(se1);
       c2.addActivity(a1);
@@ -81,12 +84,9 @@ public class Interface {
     System.out.println("*                                                *"); 
     System.out.println("*                    Enter as:                   *"); 
     System.out.println("*     1 - Celebrity              2 - Agency      *"); 
+    System.out.println("*                                                *");  
     System.out.println("*                                                *"); 
-    System.out.println("*                                                *"); 
-    System.out.println("*        3 - Consult available services          *"); 
-    System.out.println("*                                                *"); 
-    System.out.println("*                                                *"); 
-    System.out.println("*                    4 - Exit                    *"); 
+    System.out.println("*                    3 - Exit                    *"); 
     System.out.println("**************************************************"); 
      
     int choice = getIntChoice(); 
@@ -99,10 +99,7 @@ public class Interface {
       clearScreen(); 
       menuDivide(); 
     } 
-    else if(choice == 3){ 
-      menuListActivities(null); 
-    } 
-    else if(choice == 4) { 
+    else if(choice == 3) { 
       try { 
         writeInfo(); 
       } catch (IOException e) { 
@@ -694,7 +691,19 @@ public class Interface {
     else{
         System.out.println("*              Insert your price :               *"); 
         int price = getIntChoice();
-        Celebrity c = new Celebrity(name, price); 
+        System.out.println("                                                 *");
+        System.out.println("*     Choose setors (press 0 to finish):         *");
+        System.out.println("                                                 *");
+        listAllSetors();
+        int setor = getIntChoice();
+        VDMSeq setors = new VDMSeq();
+        while(setor != 0){
+        	Setor s = getSetor(setor);
+        	setors.add(s);
+        	setor = getIntChoice();
+        }
+        Celebrity c = new Celebrity(name, price,setors); 
+        
         platform.addCelebrity(c);
         
         clearScreen();

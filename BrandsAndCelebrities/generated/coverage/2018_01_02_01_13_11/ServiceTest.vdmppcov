@@ -7,9 +7,8 @@ instance variables
 -- TODO Define instance variables here
 	act : Activity := new Activity("test");
 	s : Service := new Service(act);
-	s1 : Setor := new Setor("Techonology");
-	c1 : Celebrity :=  new Celebrity("Test Celebrity 1", 35,[s1]);
-	c2 : Celebrity :=  new Celebrity("Test Celebrity 2", 27,[s1]);
+	c1 : Celebrity :=  new Celebrity("Test Celebrity 1", 35);
+	c2 : Celebrity :=  new Celebrity("Test Celebrity 2", 27);
 
 operations
 -- TODO Define operations here

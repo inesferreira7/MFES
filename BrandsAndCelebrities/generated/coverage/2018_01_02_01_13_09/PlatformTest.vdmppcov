@@ -5,9 +5,8 @@ values
 
 instance variables
  	p: Platform:= new Platform();
- 	s1 : Setor := new Setor("Techonology");
- 	c: Celebrity:= new Celebrity("cel1", 80,[s1]);
- 	c2: Celebrity:= new Celebrity("cel2", 90,[s1]);
+ 	c: Celebrity:= new Celebrity("cel1", 80);
+ 	c2: Celebrity:= new Celebrity("cel2", 90);
  	a: Agency:= new Agency("ag1");
  	act: Activity:= new Activity("Sponsor");
  	act2: Activity:= new Activity("Entertainer");

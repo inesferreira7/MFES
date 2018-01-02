@@ -7,8 +7,9 @@ import org.overture.codegen.runtime.*;
 public class ServiceTest {
   private Activity act = new Activity("test");
   private Service s = new Service(act);
-  private Celebrity c1 = new Celebrity("Test Celebrity 1", 35L);
-  private Celebrity c2 = new Celebrity("Test Celebrity 2", 27L);
+  private Setor s1 = new Setor("Techonology");
+  private Celebrity c1 = new Celebrity("Test Celebrity 1", 35L, SeqUtil.seq(s1));
+  private Celebrity c2 = new Celebrity("Test Celebrity 2", 27L, SeqUtil.seq(s1));
 
   private void assertTrue(final Boolean cond) {
 
@@ -59,6 +60,8 @@ public class ServiceTest {
         + Utils.toString(act)
         + ", s := "
         + Utils.toString(s)
+        + ", s1 := "
+        + Utils.toString(s1)
         + ", c1 := "
         + Utils.toString(c1)
         + ", c2 := "

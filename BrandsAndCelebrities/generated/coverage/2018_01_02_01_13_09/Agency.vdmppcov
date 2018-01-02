@@ -1,0 +1,109 @@
+class Agency
+types
+-- TODO Define types here
+	public String = seq1 of char;
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	public name : String;
+	private funds : nat := 0;
+	private services : seq of Service := [];
+	
+operations
+-- TODO Define operations here
+	public Agency : String ==> Agency
+	Agency(nm) == (
+	name := nm;
+	)
+	post name=nm and funds = 0 and services =[];
+	
+	public getFunds : () ==> nat
+	getFunds() == return funds;
+	
+	public getServices : () ==> seq of Service
+	getServices() == return services;
+	
+	public addFunds : nat ==> ()
+	addFunds(qty) == funds := funds + qty
+	pre qty >= 0
+	post funds >= funds~;
+	
+	public removeFunds : nat ==> ()
+	removeFunds(qty) == funds := funds - qty
+	pre funds >= qty
+	post funds >= 0 and funds <= funds~;
+	
+	public addService : Service ==> ()
+	addService(srv) == (
+	services := services ^ [srv];
+	)
+	pre srv not in set elems services
+	post srv in set elems services and len services = len services~ + 1;
+	
+	
+	
+	public hireCelebrity : Service * Celebrity ==> ()
+	hireCelebrity(serv, cel) == (
+		for i = 1 to len services do (
+			if services(i).getActivity().name = serv.getActivity().name
+			then (
+				services(i).addCelebrity(cel);
+				removeFunds(cel.getPrice());
+			)
+		);
+	)
+	pre serv in set elems services and cel not in set elems serv.getCelebrities() and cel.getPrice() <= funds
+	post cel in set elems serv.getCelebrities() and funds <= funds~;
+	
+	public fireCelebrity : Service * Celebrity ==> ()
+	fireCelebrity(serv, cel) == (
+		dcl new_serv : seq of Service := [];
+		for i = 1 to len services do (
+		if services(i) = serv
+			then services(i).removeCelebrity(cel);
+		
+		if len services(i).getCelebrities() > 0
+			then new_serv := new_serv ^ [services(i)]
+		);
+		services := new_serv;	
+	)
+	pre serv in set elems services and cel in set elems serv.getCelebrities()
+	post cel not in set elems serv.getCelebrities();
+	
+	public findServiceByCelebrity : Celebrity ==> seq of Service
+	findServiceByCelebrity(c) == (
+		dcl ret : seq of Service := [];
+		for i = 1 to len services do (
+			if c in set elems services(i).getCelebrities()
+			then ret := ret ^ [services(i)];
+		);
+		return ret;
+	);
+	
+	public hasService : seq1 of char ==> bool
+	hasService(nameS) == (
+		for i = 1 to len services do (
+			if services(i).hasActivity(nameS)
+			then return true;
+		);
+		return false;
+	);
+	
+	public hasServiceWithCelebrity : seq1 of char * Celebrity ==> bool
+	hasServiceWithCelebrity(nameS, cel) == (
+		for i = 1 to len services do (
+			if services(i).hasActivity(nameS)
+			then (
+				if cel in set elems services(i).getCelebrities()
+				then return true
+			)
+		);
+		return false;
+	);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Agency

@@ -1,0 +1,163 @@
+class Platform
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+
+	public Activity = {<Ambassador>, <Sponsor>,<Entertainer>,<Speaker>, <DigitalInfluence>, <ProductPlacement>, <Attendance>};
+	public Setor = {<Nutrition>, <Decoration>, <Consultory>, <Music>, <Cinema>, <Technology>, <Fashion>} 
+	
+instance variables
+-- TODO Define instance variables here
+	public celebrities : seq of Celebrity := [];
+	public agencies : seq of Agency := [];
+operations
+-- TODO Define operations here
+	public Platform : () ==> Platform
+	Platform() == return self;
+	
+	public getCelebsWithActivity : Activity ==> seq of Celebrity
+	getCelebsWithActivity(act) == (
+		dcl celebs: seq of Celebrity := [];
+		for i = 1 to len celebrities do (
+			for j = 1 to len celebrities(i).getActivities() do (
+			if celebrities(i).getActivities()(j).name = act.name
+				then celebs := celebs ^ [celebrities(i)] ;
+		);
+		);
+		return celebs
+	);
+	
+	public getCelebsWithSetor : Setor ==> seq of Celebrity
+	getCelebsWithSetor(s) == (
+		dcl celebs: seq of Celebrity := [];
+		for i = 1 to len celebrities do (
+			for j = 1 to len celebrities(i).getSetors() do (
+			if celebrities(i).getSetors()(j).name = s.name
+				then celebs := celebs ^ [celebrities(i)] ;
+		);
+		);
+		return celebs
+	);
+	
+	public getCelebsWithActivityAndSetor : Activity * Setor ==> set of Celebrity
+	getCelebsWithActivityAndSetor(a,s) == (
+		dcl cA: set of Celebrity := {};
+		dcl cS: set of Celebrity := {};
+		dcl result: set of Celebrity := {};
+		cA := elems getCelebsWithActivity(a);
+		cS := elems getCelebsWithSetor(s);
+		result := cA inter cS;
+		return result;
+		);
+	
+		
+	public getAgencyByName : seq1 of char ==> Agency
+	getAgencyByName(name) == (
+		dcl a: Agency;
+		for i = 1 to len agencies do (
+			if agencies(i).name = name
+			then return agencies(i);
+		);
+		return a
+	);
+	
+	public getCelebrityByName : seq1 of char ==> Celebrity
+	getCelebrityByName(name) == (
+		dcl cel : Celebrity;
+		for i = 1 to len celebrities do (
+			if celebrities(i).name = name
+			then return celebrities(i)
+		);
+		return cel;
+	);
+	
+	
+	public addCelebrity : Celebrity ==> ()
+	addCelebrity(c) == (
+	celebrities := celebrities ^ [c]
+	)
+	pre c not in set elems celebrities
+	post c in set elems celebrities and len celebrities = len celebrities~ + 1;
+	
+	public addAgency : Agency ==> ()
+	addAgency(a) == agencies := agencies ^ [a]
+	pre a not in set elems agencies
+	post a in set elems agencies and len agencies = len agencies~ + 1;
+	
+	public getCelebrities : () ==> seq of Celebrity
+	getCelebrities() == return celebrities;
+	
+	public getAgencies : () ==> seq of Agency
+	getAgencies() == return agencies;
+	
+	public getCelebrityContracts : Celebrity ==> seq of Agency
+	getCelebrityContracts(c) == (
+		dcl ret : seq of Agency := [];
+		for i = 1 to len agencies do (
+			for j = 1 to len agencies(i).getServices() do (
+				if c in set elems agencies(i).getServices()(j).getCelebrities()
+				then ret := ret ^ [agencies(i)];
+			)
+		);
+		return ret;
+	);
+	
+	public removeActivityFromCelebrity : Celebrity * Activity ==> ()
+	removeActivityFromCelebrity(c, act) == (
+		c.removeActivity(act);
+		for i = 1 to len agencies do(
+			for j = 1 to len agencies(i).getServices() do (
+				if c in set elems agencies(i).getServices()(j).getCelebrities()
+				then agencies(i).fireCelebrity(agencies(i).getServices()(j), c)
+			)
+		)
+	);
+	
+	public celebrityExists : seq1 of char ==> bool
+	celebrityExists(name) == (
+		dcl aux : seq of seq1 of char := [];
+		
+		for i = 1 to len celebrities do
+			aux := aux ^ [celebrities(i).name];
+		
+		return name in set elems aux
+	);
+	
+	public agencyExists : seq1 of char ==> bool
+	agencyExists(name) == (
+		dcl aux : seq of seq1 of char := [];
+		
+		for i = 1 to len agencies do
+			aux := aux ^ [agencies(i).name];
+		
+		return name in set elems aux
+	);
+	
+	public getCelebritiesByPrice : int ==> seq of Celebrity
+	getCelebritiesByPrice(price) == (
+		dcl ret : seq of Celebrity := [];
+		for i = 1 to len celebrities do (
+			if celebrities(i).getPrice() <= price
+			then ret := ret ^ [celebrities(i)];
+		);
+		
+		return ret;
+	);
+	
+	public getCelebritiesByRating : int ==> seq of Celebrity
+	getCelebritiesByRating(rating) == (
+		dcl ret : seq of Celebrity := [];
+		for i = 1 to len celebrities do (
+			if celebrities(i).getRating() >= rating
+			then ret := ret ^ [celebrities(i)];
+		);
+		
+		return ret;
+	);
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Platform
