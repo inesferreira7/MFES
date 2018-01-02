@@ -2,10 +2,9 @@ package BrandsAndCelebrities;
 
 import java.util.*;
 import org.overture.codegen.runtime.*;
-import java.io.Serializable;
 
 @SuppressWarnings("all")
-public class Service implements Serializable{
+public class Service {
   private Activity activity;
   private VDMSeq celebs = SeqUtil.seq();
 
@@ -37,9 +36,9 @@ public class Service implements Serializable{
   public void removeCelebrity(final Celebrity c) {
 
     VDMSeq new_celebs = SeqUtil.seq();
-    long toVar_20 = celebs.size();
+    long toVar_22 = celebs.size();
 
-    for (Long i = 1L; i <= toVar_20; i++) {
+    for (Long i = 1L; i <= toVar_22; i++) {
       if (!(Utils.equals(((Celebrity) Utils.get(celebs, i)), c))) {
         new_celebs =
             SeqUtil.conc(Utils.copy(new_celebs), SeqUtil.seq(((Celebrity) Utils.get(celebs, i))));

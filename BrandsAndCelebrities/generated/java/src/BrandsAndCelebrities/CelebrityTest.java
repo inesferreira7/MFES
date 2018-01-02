@@ -26,15 +26,15 @@ public class CelebrityTest {
 
     IO.print("\nTesting get functions...\n");
     assertTrue(Utils.empty(c.getActivities()));
-    Boolean andResult_21 = false;
+    Boolean andResult_23 = false;
 
     if (c.getRating().longValue() > 0L) {
       if (c.getRating().longValue() < 6L) {
-        andResult_21 = true;
+        andResult_23 = true;
       }
     }
 
-    assertTrue(andResult_21);
+    assertTrue(andResult_23);
 
     assertTrue(Utils.equals(c.getPrice(), 35L));
   }

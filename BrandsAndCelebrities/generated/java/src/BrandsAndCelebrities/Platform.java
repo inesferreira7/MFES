@@ -2,15 +2,27 @@ package BrandsAndCelebrities;
 
 import java.util.*;
 import org.overture.codegen.runtime.*;
-import java.io.Serializable;
 
 @SuppressWarnings("all")
-public class Platform implements Serializable{
+public class Platform {
   public static final VDMSet Activity =
       SetUtil.set(
-          BrandsAndCelebrities.quotes.EmbassadorQuote.getInstance(),
+          BrandsAndCelebrities.quotes.AmbassadorQuote.getInstance(),
           BrandsAndCelebrities.quotes.SponsorQuote.getInstance(),
-          BrandsAndCelebrities.quotes.EntertainerQuote.getInstance());
+          BrandsAndCelebrities.quotes.EntertainerQuote.getInstance(),
+          BrandsAndCelebrities.quotes.SpeakerQuote.getInstance(),
+          BrandsAndCelebrities.quotes.DigitalInfluenceQuote.getInstance(),
+          BrandsAndCelebrities.quotes.ProductPlacementQuote.getInstance(),
+          BrandsAndCelebrities.quotes.AttendanceQuote.getInstance());
+  public static final VDMSet Setor =
+      SetUtil.set(
+          BrandsAndCelebrities.quotes.NutritionQuote.getInstance(),
+          BrandsAndCelebrities.quotes.DecorationQuote.getInstance(),
+          BrandsAndCelebrities.quotes.ConsultoryQuote.getInstance(),
+          BrandsAndCelebrities.quotes.MusicQuote.getInstance(),
+          BrandsAndCelebrities.quotes.CinemaQuote.getInstance(),
+          BrandsAndCelebrities.quotes.TechnologyQuote.getInstance(),
+          BrandsAndCelebrities.quotes.FashionQuote.getInstance());
   public VDMSeq celebrities = SeqUtil.seq();
   public VDMSeq agencies = SeqUtil.seq();
 
@@ -45,12 +57,44 @@ public class Platform implements Serializable{
     return Utils.copy(celebs);
   }
 
+  public VDMSeq getCelebsWithSetor(final Setor s) {
+
+    VDMSeq celebs = SeqUtil.seq();
+    long toVar_11 = celebrities.size();
+
+    for (Long i = 1L; i <= toVar_11; i++) {
+      long toVar_10 = ((Celebrity) Utils.get(celebrities, i)).getSetors().size();
+
+      for (Long j = 1L; j <= toVar_10; j++) {
+        if (Utils.equals(
+            ((Setor) Utils.get(((Celebrity) Utils.get(celebrities, i)).getSetors(), j)).name,
+            s.name)) {
+          celebs =
+              SeqUtil.conc(
+                  Utils.copy(celebs), SeqUtil.seq(((Celebrity) Utils.get(celebrities, i))));
+        }
+      }
+    }
+    return Utils.copy(celebs);
+  }
+
+  public VDMSet getCelebsWithActivityAndSetor(final Activity a, final Setor s) {
+
+    VDMSet cA = SetUtil.set();
+    VDMSet cS = SetUtil.set();
+    VDMSet result = SetUtil.set();
+    cA = SeqUtil.elems(getCelebsWithActivity(a));
+    cS = SeqUtil.elems(getCelebsWithSetor(s));
+    result = SetUtil.intersect(Utils.copy(cA), Utils.copy(cS));
+    return Utils.copy(result);
+  }
+
   public Agency getAgencyByName(final String name) {
 
     Agency a = null;
-    long toVar_10 = agencies.size();
+    long toVar_12 = agencies.size();
 
-    for (Long i = 1L; i <= toVar_10; i++) {
+    for (Long i = 1L; i <= toVar_12; i++) {
       if (Utils.equals(((Agency) Utils.get(agencies, i)).name, name)) {
         return ((Agency) Utils.get(agencies, i));
       }
@@ -61,9 +105,9 @@ public class Platform implements Serializable{
   public Celebrity getCelebrityByName(final String name) {
 
     Celebrity cel = null;
-    long toVar_11 = celebrities.size();
+    long toVar_13 = celebrities.size();
 
-    for (Long i = 1L; i <= toVar_11; i++) {
+    for (Long i = 1L; i <= toVar_13; i++) {
       if (Utils.equals(((Celebrity) Utils.get(celebrities, i)).name, name)) {
         return ((Celebrity) Utils.get(celebrities, i));
       }
@@ -94,12 +138,12 @@ public class Platform implements Serializable{
   public VDMSeq getCelebrityContracts(final Celebrity c) {
 
     VDMSeq ret = SeqUtil.seq();
-    long toVar_13 = agencies.size();
+    long toVar_15 = agencies.size();
 
-    for (Long i = 1L; i <= toVar_13; i++) {
-      long toVar_12 = ((Agency) Utils.get(agencies, i)).getServices().size();
+    for (Long i = 1L; i <= toVar_15; i++) {
+      long toVar_14 = ((Agency) Utils.get(agencies, i)).getServices().size();
 
-      for (Long j = 1L; j <= toVar_12; j++) {
+      for (Long j = 1L; j <= toVar_14; j++) {
         if (SetUtil.inSet(
             c,
             SeqUtil.elems(
@@ -115,12 +159,12 @@ public class Platform implements Serializable{
   public void removeActivityFromCelebrity(final Celebrity c, final Activity act) {
 
     c.removeActivity(act);
-    long toVar_15 = agencies.size();
+    long toVar_17 = agencies.size();
 
-    for (Long i = 1L; i <= toVar_15; i++) {
-      long toVar_14 = ((Agency) Utils.get(agencies, i)).getServices().size();
+    for (Long i = 1L; i <= toVar_17; i++) {
+      long toVar_16 = ((Agency) Utils.get(agencies, i)).getServices().size();
 
-      for (Long j = 1L; j <= toVar_14; j++) {
+      for (Long j = 1L; j <= toVar_16; j++) {
         if (SetUtil.inSet(
             c,
             SeqUtil.elems(
@@ -137,9 +181,9 @@ public class Platform implements Serializable{
   public Boolean celebrityExists(final String name) {
 
     VDMSeq aux = SeqUtil.seq();
-    long toVar_16 = celebrities.size();
+    long toVar_18 = celebrities.size();
 
-    for (Long i = 1L; i <= toVar_16; i++) {
+    for (Long i = 1L; i <= toVar_18; i++) {
       aux =
           SeqUtil.conc(Utils.copy(aux), SeqUtil.seq(((Celebrity) Utils.get(celebrities, i)).name));
     }
@@ -149,9 +193,9 @@ public class Platform implements Serializable{
   public Boolean agencyExists(final String name) {
 
     VDMSeq aux = SeqUtil.seq();
-    long toVar_17 = agencies.size();
+    long toVar_19 = agencies.size();
 
-    for (Long i = 1L; i <= toVar_17; i++) {
+    for (Long i = 1L; i <= toVar_19; i++) {
       aux = SeqUtil.conc(Utils.copy(aux), SeqUtil.seq(((Agency) Utils.get(agencies, i)).name));
     }
     return SetUtil.inSet(name, SeqUtil.elems(Utils.copy(aux)));
@@ -160,9 +204,9 @@ public class Platform implements Serializable{
   public VDMSeq getCelebritiesByPrice(final Number price) {
 
     VDMSeq ret = SeqUtil.seq();
-    long toVar_18 = celebrities.size();
+    long toVar_20 = celebrities.size();
 
-    for (Long i = 1L; i <= toVar_18; i++) {
+    for (Long i = 1L; i <= toVar_20; i++) {
       if (((Celebrity) Utils.get(celebrities, i)).getPrice().longValue() <= price.longValue()) {
         ret = SeqUtil.conc(Utils.copy(ret), SeqUtil.seq(((Celebrity) Utils.get(celebrities, i))));
       }
@@ -173,9 +217,9 @@ public class Platform implements Serializable{
   public VDMSeq getCelebritiesByRating(final Number rating) {
 
     VDMSeq ret = SeqUtil.seq();
-    long toVar_19 = celebrities.size();
+    long toVar_21 = celebrities.size();
 
-    for (Long i = 1L; i <= toVar_19; i++) {
+    for (Long i = 1L; i <= toVar_21; i++) {
       if (((Celebrity) Utils.get(celebrities, i)).getRating().longValue() >= rating.longValue()) {
         ret = SeqUtil.conc(Utils.copy(ret), SeqUtil.seq(((Celebrity) Utils.get(celebrities, i))));
       }
@@ -188,6 +232,8 @@ public class Platform implements Serializable{
     return "Platform{"
         + "Activity = "
         + Utils.toString(Activity)
+        + ", Setor = "
+        + Utils.toString(Setor)
         + ", celebrities := "
         + Utils.toString(celebrities)
         + ", agencies := "

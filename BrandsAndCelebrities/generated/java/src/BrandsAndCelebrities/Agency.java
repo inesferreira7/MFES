@@ -2,10 +2,9 @@ package BrandsAndCelebrities;
 
 import java.util.*;
 import org.overture.codegen.runtime.*;
-import java.io.Serializable;
 
 @SuppressWarnings("all")
-public class Agency implements Serializable{
+public class Agency {
   public String name;
   private Number funds = 0L;
   private VDMSeq services = SeqUtil.seq();

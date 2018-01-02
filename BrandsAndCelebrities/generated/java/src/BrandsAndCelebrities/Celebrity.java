@@ -2,12 +2,12 @@ package BrandsAndCelebrities;
 
 import java.util.*;
 import org.overture.codegen.runtime.*;
-import java.io.Serializable;
 
 @SuppressWarnings("all")
-public class Celebrity implements Serializable{
+public class Celebrity {
   public String name;
   private VDMSeq activities = SeqUtil.seq();
+  private VDMSeq setors = SeqUtil.seq();
   private Number rating;
   private Number price;
 
@@ -28,6 +28,11 @@ public class Celebrity implements Serializable{
     return Utils.copy(activities);
   }
 
+  public VDMSeq getSetors() {
+
+    return Utils.copy(setors);
+  }
+
   public Number getRating() {
 
     return rating;
@@ -41,6 +46,11 @@ public class Celebrity implements Serializable{
   public void addActivity(final Activity a) {
 
     activities = SeqUtil.conc(Utils.copy(activities), SeqUtil.seq(a));
+  }
+
+  public void addSetor(final Setor s) {
+
+    setors = SeqUtil.conc(Utils.copy(setors), SeqUtil.seq(s));
   }
 
   public void removeActivity(final Activity a) {
@@ -73,15 +83,15 @@ public class Celebrity implements Serializable{
 
   public static Boolean validRating(final Number r) {
 
-    Boolean andResult_14 = false;
+    Boolean andResult_16 = false;
 
     if (r.longValue() > 0L) {
       if (r.longValue() < 6L) {
-        andResult_14 = true;
+        andResult_16 = true;
       }
     }
 
-    return andResult_14;
+    return andResult_16;
   }
 
   public String toString() {
@@ -91,6 +101,8 @@ public class Celebrity implements Serializable{
         + Utils.toString(name)
         + ", activities := "
         + Utils.toString(activities)
+        + ", setors := "
+        + Utils.toString(setors)
         + ", rating := "
         + Utils.toString(rating)
         + ", price := "

@@ -1,4 +1,4 @@
-/*package BrandsAndCelebrities;
+package BrandsAndCelebrities;
 
 import java.util.*;
 import org.overture.codegen.runtime.*;
@@ -39,4 +39,4 @@ public class runTests {
         + Utils.toString(pt1)
         + "}";
   }
-}*/
+}

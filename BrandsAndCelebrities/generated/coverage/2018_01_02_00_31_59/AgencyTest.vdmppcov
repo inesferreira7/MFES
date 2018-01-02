@@ -51,7 +51,7 @@ operations
 		IO`print("Celebrities hired to that service: "); IO`print(a.getServices()(1).getCelebrities()(1)); IO`print("\n");
 		IO`print("Firing the previous celebrity from the service...\n");
 		a.fireCelebrity(s,c);
-		-- ESTA MAL assertTrue(a.getServices()(1).getCelebrities() = []);
+		assertTrue(a.getServices()(1).getCelebrities() = []);
 		IO`print("Celebrities hired to that service: "); IO`print(len a.getServices()(1).getCelebrities()); IO`print("\n");
 	);
 	

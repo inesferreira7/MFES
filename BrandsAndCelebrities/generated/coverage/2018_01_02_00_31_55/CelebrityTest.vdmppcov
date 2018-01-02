@@ -1,0 +1,46 @@
+class CelebrityTest
+types
+
+values
+
+instance variables
+	
+	act : Activity := new Activity("test");
+	c : Celebrity := new Celebrity("Test Celebrity", 35);
+	
+operations
+	private assertTrue: bool ==> ()
+	assertTrue(cond) == return
+	pre cond;
+	
+	private testAddActivity: () ==> ()
+	testAddActivity() == (
+	 IO`print("\nTesting add activity to celebrity...\n");
+	 c.addActivity(act);
+	 assertTrue(c.getActivities() = [act]);
+	 assertTrue(c.hasActivity("test") = true);
+	 assertTrue(c.hasActivity("test2") = false);
+	);
+	
+	
+	private testGets: () ==> ()
+	testGets() == (
+		IO`print("\nTesting get functions...\n");
+		
+		assertTrue(c.getActivities() = []);
+		assertTrue(c.getRating() > 0 and c.getRating() <6);
+		assertTrue(c.getPrice() = 35);
+	);
+
+	public static runTests: () ==> ()
+	runTests() == (
+		IO`print("*** Running Celebrity tests ***\n");
+		new CelebrityTest().testGets();
+		new CelebrityTest().testAddActivity();
+	)
+
+functions
+
+traces
+-- TODO Define Combinatorial Test Traces here
+end CelebrityTest

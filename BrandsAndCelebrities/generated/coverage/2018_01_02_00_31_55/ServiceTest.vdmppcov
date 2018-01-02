@@ -1,0 +1,53 @@
+class ServiceTest
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+-- TODO Define instance variables here
+	act : Activity := new Activity("test");
+	s : Service := new Service(act);
+	c1 : Celebrity :=  new Celebrity("Test Celebrity 1", 35);
+	c2 : Celebrity :=  new Celebrity("Test Celebrity 2", 27);
+
+operations
+-- TODO Define operations here
+	private assertTrue: bool ==> ()
+	assertTrue(cond) == return
+	pre cond;
+
+	private testAddRemoveCelebrity: () ==> ()
+	testAddRemoveCelebrity() == (
+		c1.addActivity(act);
+	 	c2.addActivity(act);
+		IO`print("* Test adding and removing celebrities from a service *\n");
+		IO`print("\nAdding 2 celebrities to the service...\n");
+		s.addCelebrity(c1);
+		s.addCelebrity(c2);
+		assertTrue(s.getCelebrities() = [c1, c2]);
+		IO`print("Current celebrities: "); IO`print(s.getCelebrities()(1)); IO`print(s.getCelebrities()(2)); IO`print("\n");
+		IO`print("Removing the first celebrity...\n");
+		s.removeCelebrity(c1);
+		assertTrue(s.getCelebrities() = [c2]);
+		IO`print("Current celebrities: "); IO`print(s.getCelebrities()(1)); IO`print("\n");
+	);
+	
+	private testGets: () ==> ()
+	testGets() == (
+		IO`print("\nTesting get functions...\n");
+		assertTrue(s.getActivity() = act);
+		assertTrue(s.getCelebrities() = []);
+	);
+	
+	public static runTests: () ==> ()
+	runTests() == (
+		IO`print("*** Running Service tests ***\n");
+		new ServiceTest().testGets();
+		new ServiceTest().testAddRemoveCelebrity();
+	)
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end ServiceTest

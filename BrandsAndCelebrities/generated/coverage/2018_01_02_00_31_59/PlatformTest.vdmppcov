@@ -1,0 +1,117 @@
+class PlatformTest
+types
+
+values
+
+instance variables
+ 	p: Platform:= new Platform();
+ 	c: Celebrity:= new Celebrity("cel1", 80);
+ 	c2: Celebrity:= new Celebrity("cel2", 90);
+ 	a: Agency:= new Agency("ag1");
+ 	act: Activity:= new Activity("Sponsor");
+ 	act2: Activity:= new Activity("Entertainer");
+ 	s: Service:= new Service(act2);
+ 	
+operations
+
+	private assertTrue: bool ==> ()
+	assertTrue(cond) == return
+	pre cond;
+	
+		private testGets: () ==> ()
+	testGets() == (
+		IO`print("\nTesting get functions...\n");
+		assertTrue(p.getCelebrities() = []);
+	);
+	
+		private testAddCelebrity: () ==> ()
+		testAddCelebrity() == (
+	 	IO`print("\nTesting add celebrity to platform...\n");
+	 	p.addCelebrity(c);
+	 	assertTrue(p.getCelebrities() = [c]);
+	);
+	
+	private testAddAgency: () ==> ()
+		testAddAgency() == (
+	 	IO`print("\nTesting add agency to platform...\n");
+	 	p.addAgency(a);
+	 	assertTrue(p.getAgencies() = [a]);
+	);
+	
+	private testAgencyByName: () ==> ()
+	testAgencyByName() == (
+		p.addAgency(a);
+		IO`print("\nTesting get agency by name \n");
+		assertTrue(p.getAgencyByName("ag1") = a);
+	);
+	
+	private testCelebrityByName: () ==> ()
+	testCelebrityByName() == (
+		p.addCelebrity(c);
+		IO`print("\nTesting get celebrity by name \n");
+		assertTrue(p.getCelebrityByName("cel1") = c);
+		assertTrue(p.getCelebrityByName("cel3") = undefined);
+	);
+	
+	private testCelebsWithActivity: () ==> ()
+		testCelebsWithActivity() == (
+		IO`print("\nTesting get celebrities with given activity \n");
+		c.addActivity(act);
+		c2.addActivity(act);
+		p.addCelebrity(c);
+		p.addCelebrity(c2);
+		assertTrue(p.getCelebsWithActivity(act) = [c, c2]);
+		);
+		
+		private testRemoveActivity: () ==> ()
+		testRemoveActivity() == (
+		IO`print("\nTesting remove activity from celebrity \n");
+		c.addActivity(act);
+		c.addActivity(act2);
+		p.addCelebrity(c);
+		
+		s.addCelebrity(c);
+		a.addService(s);
+		p.addAgency(a);
+		
+		assertTrue(c.getActivities() = [act,act2]);
+		assertTrue(s.getCelebrities() = [c]);
+		
+		p.removeActivityFromCelebrity(c, act);
+		
+		assertTrue(c.getActivities() = [act2]);
+		assertTrue(s.getCelebrities() = []);
+		
+		);
+		
+		private testCelebContracts: () ==> ()
+		testCelebContracts() == (
+		IO`print("\n Testing get celebrity contracts \n");
+		c.addActivity(act2);
+		s.addCelebrity(c);
+		a.addService(s);
+		p.addAgency(a);
+		
+		assertTrue(p.getCelebrityContracts(c) = [a]);
+		);
+		
+	
+	public static runTests: () ==> ()
+	runTests() == (
+		IO`print("*** Running Platform tests ***\n");
+		new PlatformTest().testGets();
+		new PlatformTest().testAddCelebrity();
+		new PlatformTest().testAddAgency();
+		new PlatformTest().testAgencyByName();
+		new PlatformTest().testCelebrityByName();
+		new PlatformTest().testCelebsWithActivity();
+		new PlatformTest().testRemoveActivity();
+		new PlatformTest().testCelebContracts();
+	)
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end PlatformTest
+
