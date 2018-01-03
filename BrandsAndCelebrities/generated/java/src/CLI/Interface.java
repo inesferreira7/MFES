@@ -512,7 +512,7 @@ public class Interface {
     System.out.println("                Agency - " + ag.name ); 
     System.out.println("**************************************************");
     System.out.println("*                                                *");
-    System.out.println("        Funds: " + ag.getFunds() + "Â€");
+    System.out.println("        Funds: " + ag.getFunds() + "€");
     System.out.println("*                                                *"); 
     System.out.println("*       1 - Consult services available           *"); 
     System.out.println("*       2 - List all my contracts                *");
@@ -553,7 +553,7 @@ public class Interface {
 	    System.out.println("                Agency - " + ag.name ); 
 	    System.out.println("**************************************************");
 	    System.out.println("*                                                *");
-	    System.out.println("        Current Funds: " + ag.getFunds() + "Â€");
+	    System.out.println("        Current Funds: " + ag.getFunds() + "€");
 	    System.out.println("*                                                *");
 	    System.out.println("*       Insert the ammount you want to add :     *"); 
 	    int funds = getIntChoice();
@@ -652,7 +652,7 @@ public class Interface {
 	    System.out.println();
 	    System.out.println("         Name: " + c.name);
 	    System.out.println("         Rating: " + c.getRating());
-	    System.out.println("         Price: " + c.getPrice() + "Â€");
+	    System.out.println("         Price: " + c.getPrice() + "€");
 	    System.out.println();
 	    System.out.println("      1 - Fire Celebrity          0 - Back");
 	    
@@ -941,7 +941,7 @@ public class Interface {
 	  
 	  while(it.hasNext()){
 		  Celebrity cel = (Celebrity) it.next();
-		  System.out.println("         " + i + " - " + cel.name + "  Rating: " + cel.getRating() + "  Price: " + cel.getPrice() + "Â€");
+		  System.out.println("         " + i + " - " + cel.name + "  Rating: " + cel.getRating() + "  Price: " + cel.getPrice() + "€");
 		  i++;
 	  }
   }
@@ -952,7 +952,7 @@ public class Interface {
 	  
 	  while(it.hasNext()){
 		  Celebrity cel = (Celebrity) it.next();
-		  System.out.println("         " + i + " - " + cel.name + "  Rating: " + cel.getRating() + "  Price: " + cel.getPrice() + "Â€");
+		  System.out.println("         " + i + " - " + cel.name + "  Rating: " + cel.getRating() + "  Price: " + cel.getPrice() + "€");
 		  i++;
 	  }
   }
@@ -963,7 +963,7 @@ public class Interface {
 	  
 	  while(it.hasNext()){
 		  Celebrity cel = (Celebrity) it.next();
-		  System.out.println("         " + i + " - " + cel.name + "  Rating: " + cel.getRating() + "  Price: " + cel.getPrice() + "Â€");
+		  System.out.println("         " + i + " - " + cel.name + "  Rating: " + cel.getRating() + "  Price: " + cel.getPrice() + "€");
 		  i++;
 	  }
   }
@@ -1135,10 +1135,10 @@ public class Interface {
 	      Celebrity c = (Celebrity) iter.next();
 	      	
 	      if(ag == null)
-	      		System.out.println("   " + i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice() + "Â€");
+	      		System.out.println("   " + i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice() + "€");
 	      	
 	      	else if(!ag.hasServiceWithCelebrity(act.name, c)){
-	            System.out.println("   " + i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice() + "Â€"); 
+	            System.out.println("   " + i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice() + "€"); 
 	      	}
 	        i++; 
 	    } 
@@ -1155,7 +1155,7 @@ public class Interface {
      
     while (iter.hasNext()) { 
       Celebrity c = (Celebrity) iter.next();
-      System.out.println("   " + i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice() + "Â€"); 
+      System.out.println("   " + i + " - Name: " + c.name + "  Rating: " + c.getRating() + "  Price: " + c.getPrice() + "€"); 
         i++; 
     } 
     System.out.println();
